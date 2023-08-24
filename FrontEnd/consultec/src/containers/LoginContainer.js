@@ -3,11 +3,11 @@ import LoginView from '../views/LoginView';
 import AuthService from '../services/AuthService'; // Archivo de servicio que maneja la autenticación
 
 function LoginContainer() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleUsernameChange = (value) => {
-        setUsername(value);
+    const handleEmailChange = (value) => {
+        setEmail(value);
     };
 
     const handlePasswordChange = (value) => {
@@ -16,18 +16,23 @@ function LoginContainer() {
 
     const handleLogin = async () => {
         try {
-            const response = await AuthService.login(username, password);
-            // Manejar la respuesta de autenticación aquí
+            const response = await AuthService.login(email, password);
+            if (response.success) {
+                console.log("Login success:", response.user);
+            } else {
+                // Manejar errores de autenticación aquí
+                console.log("Login failed:", response.user);
+            }
         } catch (error) {
-            // Manejar errores de autenticación aquí
+            console.log("Error handle login:", error);
         }
     };
 
     return (
         <LoginView
-            username={username}
+            email={email}
             password={password}
-            onUsernameChange={handleUsernameChange}
+            onEmailChange={handleEmailChange}
             onPasswordChange={handlePasswordChange}
             onLogin={handleLogin}
         />

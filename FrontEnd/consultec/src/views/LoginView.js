@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/LoginStyle.css';
 
-function LoginView({ username, password, onUsernameChange, onPasswordChange, onLogin }) {
+function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin }) {
     return (
         <div className="login-container">
             <div className="login-form">
@@ -10,9 +10,9 @@ function LoginView({ username, password, onUsernameChange, onPasswordChange, onL
                 <form>
                     <input
                         type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={(e) => onUsernameChange(e.target.value)}
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => onEmailChange(e.target.value)}
                     />
                     <input
                         type="password"
