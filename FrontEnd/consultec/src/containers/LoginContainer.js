@@ -1,10 +1,13 @@
+import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
+
+
 import LoginView from '../views/LoginView';
-import AuthService from '../services/AuthService'; // Archivo de servicio que maneja la autenticación
 
 function LoginContainer() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const auth = getAuth();
 
     const handleEmailChange = (value) => {
         setEmail(value);
@@ -14,18 +17,17 @@ function LoginContainer() {
         setPassword(value);
     };
 
-    const handleLogin = async () => {
-        try {
-            const response = await AuthService.login(email, password);
-            if (response.success) {
-                console.log("Login success:", response.user);
-            } else {
-                // Manejar errores de autenticación aquí
-                console.log("Login failed:", response.user);
-            }
-        } catch (error) {
-            console.log("Error handle login:", error);
-        }
+    const handleLogin = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                console.log(userCredential);
+            })
+            .catch((error) => {
+                alert('Usuario o contraseña incorrectos');
+                console.log(error);
+            });
     };
 
     return (
