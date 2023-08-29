@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
-import firebaseApp from '../firebaseConfig';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
 import LoginView from '../views/LoginView';
 
 function LoginContainer() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const auth = getAuth(firebaseApp);
+    const navigate = useNavigate();
 
     const handleEmailChange = (value) => {
         setEmail(value);
@@ -24,6 +24,7 @@ function LoginContainer() {
             .then((userCredential) => {
                 // Signed in
                 console.log(userCredential);
+                navigate.push('/home');
             })
             .catch((error) => {
                 alert('Usuario o contraseña incorrectos');

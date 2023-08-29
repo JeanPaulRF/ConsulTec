@@ -1,42 +1,20 @@
-
 import React from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import LoginContainer from './containers/LoginContainer';
+import HomeContainer from './containers/HomeContainer';
 
 function App() {
 
   return (
-    <div className="App">
-      <LoginContainer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/home" component={HomeContainer} />
+        <Route path="/login" element={<LoginContainer />} />
+      </Routes >
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-
-/*
-import handleSubmit from './handlesubmit';
-import { useRef } from 'react';
-
-function App() {
-  const dataRef = useRef()
-
-  const submithandler = (e) => {
-    e.preventDefault()
-    handleSubmit(dataRef.current.value)
-    dataRef.current.value = ""
-  }
-
-  return (
-    <div className="App">
-      <form onSubmit={submithandler}>
-        <input type="text" ref={dataRef} />
-        <button type="submit">Save</button>
-      </form>
-    </div>
-  );
-}
-
-export default App;
-*/
