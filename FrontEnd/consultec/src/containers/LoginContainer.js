@@ -1,5 +1,6 @@
-import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
+import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import firebaseApp from '../firebaseConfig';
 
 
 import LoginView from '../views/LoginView';
@@ -7,7 +8,7 @@ import LoginView from '../views/LoginView';
 function LoginContainer() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const auth = getAuth();
+    const auth = getAuth(firebaseApp);
 
     const handleEmailChange = (value) => {
         setEmail(value);

@@ -20,6 +20,8 @@ function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin }
                         onChange={(e) => onPasswordChange(e.target.value)}
                     />
                     <button onClick={onLogin}>Login</button>
+                    <href className="forgot-password">Olvido su contraseña?</href>
+                    <href className="register">No tiene una cuenta? Registrese</href>
                 </form>
             </div>
         </div>
