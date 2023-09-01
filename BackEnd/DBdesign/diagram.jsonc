@@ -37,5 +37,85 @@
         }
       ]
     }
-  ]
+  ],
+  "summaries": [
+    { // example with latext 
+      "sumaryId": 0,
+      "subThemeId": 0,
+      "authorId": "admin@admin",
+      "postTime": "17-07-23T11:26",
+      "contentType": "latex",
+      "content": " \\sum_{a}^{b} \\left ( \\frac{\\tfrac{a}{b}}{a} \\right ) ",
+      "hasVoiceExplain": true,
+      "voice": "https://firebase.google.com/docs/consultec/021372"
+    },
+    { // example with pdf
+      "sumaryId": 1,
+      "subThemeId": 0,
+      "authorId": "admin@admin",
+      "postTime": "17-07-23T11:26",
+      "contentType": "pdf",
+      "contentUrl": "https://firebase.google.com/docs/consultec/021373",
+      "hasVoiceExplain": false
+    },
+    {
+      // another sumary
+    }
+  ],
+  "examples": [
+    { // example with latext 
+      "exampleId": 0,
+      "subThemeId": 0,
+      "authorId": "admin@admin",
+      "postTime": "17-07-23T11:28",
+      "contentType": "latex",
+      "content": " \\sum_{a}^{b} \\left ( \\frac{\\tfrac{a}{b}}{a} \\right ) ",
+      "hasVoiceExplain": true,
+      "voice": "https://firebase.google.com/docs/consultec/021372"
+    },
+    { // example with pdf
+      "exampleId": 1,
+      "subThemeId": 0,
+      "authorId": "admin@admin",
+      "postTime": "17-07-23T11:28",
+      "contentType": "pdf",
+      "contentUrl": "https://firebase.google.com/docs/consultec/021373",
+      "hasVoiceExplain": false
+    },
+    {
+      // another example
+    }
+  ],
+  "questions": [
+    {
+      "subThemeId": 0,
+      "questions": [
+        { // question
+        "questionId": 0,
+        "authorId": "test@estudiantec.cr",
+        "postTime": "17-07-23T11:30",
+        "content": "No entiendo este que hacer aquí...",
+        "state": "answered",
+        "reviewAvg": 3,
+        "answer": { // answer
+          "answerId": 0,
+          "authorId": "admin@admin",
+          "postTime": "17-07-23T11:36",
+          "contentType": "pdf",
+          "contentUrl": "https://firebase.google.com/docs/consultec/121273",
+          "hasVoiceExplain": false
+          }
+        },
+        {
+          // another question
+        }
+      ]
+    },
+    {
+      "subThemeId": 1,
+      "questions": [
+        //a lot of questions
+      ]
+    }
+  ],
 }
