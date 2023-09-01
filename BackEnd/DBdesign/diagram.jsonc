@@ -94,7 +94,7 @@
         "questionId": 0,
         "authorId": "test@estudiantec.cr",
         "postTime": "17-07-23T11:30",
-        "content": "No entiendo este que hacer aquí...",
+        "content": "No entiendo que hacer aquí...",
         "state": "answered",
         "reviewAvg": 3,
         "answer": { // answer
@@ -106,9 +106,24 @@
           "hasVoiceExplain": false
           }
         },
-        {
-          // another question
-        }
+        { // question with linked answer
+        "questionId": 1,
+        "authorId": "test@estudiantec.cr",
+        "postTime": "17-07-23T11:30",
+        "content": "No entiendo que hacer por aquí...",
+        "state": "answered",
+        "reviewAvg": 3,
+        "answer": { // answer
+          "answerId": 1,
+          "authorId": "admin@admin",
+          "postTime": "17-07-23T11:37",
+          "contentType": "linkedAnswer",
+          "answerLink": {
+            "questionId": 0,
+            "onlyAnswer": false
+            }
+          }
+        },
       ]
     },
     {
@@ -118,4 +133,23 @@
       ]
     }
   ],
+  "reviews": [
+    {
+      "questionId": 0,
+      "reviews":[
+        {
+          "authorId": "test@estudiantec.cr",
+          "review": 3,
+          "tags": ["graspable", "stepbystep"],
+          "postTime": "17-07-23T11:40"
+        },
+        {
+          // another review
+        }
+      ]
+    },
+    {
+      // another question reviews 
+    }
+  ]
 }
