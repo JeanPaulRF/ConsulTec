@@ -1,0 +1,41 @@
+//This is just the diagram of the DB.
+{
+  "users": [
+    {
+      "userId": 0,
+      "email": "test@estudiantec.cr",
+      "name": "Test Test Test",
+      "career": "Test engineering"
+    },
+    {
+      // another user 
+    }
+  ],
+  "courses": [
+    {
+      "courseId": 0,
+      "name": "Matemática Discreta",
+      "themes": [
+        {
+          "name": "themeTest",
+          "authorId": "admin@admin",
+          "postTime": "17-07-23T11:24",
+          "subThemes": [
+            {
+              "name": "subThemeTest",
+              "subThemeId": 0,
+              "authorId": "admin@admin",
+              "postTime": "17-07-23T11:25",
+            },
+            {
+              // another sub-theme
+            }
+          ]
+        },
+        {
+          // ahother theme 
+        }
+      ]
+    }
+  ]
+}
