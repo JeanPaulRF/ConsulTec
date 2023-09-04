@@ -1,11 +1,22 @@
 import React from 'react';
-import '../styles/LoginStyle.css';
-import BarraPrincipal from '../components/BarraPrincipal';
 
-function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin }) {
+function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, onRegister }) {
     return (
         <div style={{ backgroundImage: "url('https://th.bing.com/th/id/R.8f11c679e5dac264326985cd4419f975?rik=n%2bnPpJrHK72m9g&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fd%2f9%2f2%2f94254.jpg&ehk=rfeXjwbaITK5Sv1h0%2boMsgAN0shLtxuK5et51esIWJk%3d&risl=&pid=ImgRaw&r=0')" }}>
-            <BarraPrincipal />
+            <header class="w-full text-gray-700 bg-blue-400 border-t bg-opacity-50 border-gray-100 shadow-sm body-font">
+                <div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
+                    <a href="#_" class="flex items-center order-first mb-4 text-4xl font-semibold text-gray-900 lg:order-none lg:w-1/5 title-font lg:items-start lg:justify-start md:mb-0">
+                        ConsulTec
+                    </a>
+                    <div class="inline-flex items-end h-full ml-5 lg:w-2/5 lg:justify-end lg:ml-auto">
+                        <button
+                            class="px-8 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-gray-700 rounded-3xl shadow outline-none active:bg-gray-900 hover:shadow-md focus:outline-none"
+                            onClick={onRegister}>
+                            Registrarse
+                        </button>
+                    </div>
+                </div>
+            </header>
             <div className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat">
                 <img className='mr-80 mt-[-170px]' src="https://cdn-icons-png.flaticon.com/512/2702/2702154.png" width="350" alt="" srcSet="" />
                 <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 mt-[-80px]">
@@ -39,7 +50,7 @@ function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin }
                                 </button>
                             </div>
                             <div className="mb-0 py-4 flex flex-col items-center">
-                                <a href='#_' className="text-gray-300">¿Olvidó su contraseña?</a>
+                                <button className="text-gray-300">¿Olvidó su contraseña?</button>
                             </div>
                         </form>
                     </div>

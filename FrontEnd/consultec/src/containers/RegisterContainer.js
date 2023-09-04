@@ -1,4 +1,3 @@
-import { Button } from "@nextui-org/react";
 import { useState } from "react";
 import { useAuth } from "../context/authContext"
 import { useNavigate } from "react-router-dom"
@@ -24,7 +23,7 @@ function RegisterContainer() {
     setError("")
     try {
       await signup(user.email, user.password)
-      navigate('/home')
+      navigate('/login')
     } catch (error) {
         setError(error.message);
     }

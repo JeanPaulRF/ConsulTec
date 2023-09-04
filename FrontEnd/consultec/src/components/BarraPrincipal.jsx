@@ -9,9 +9,9 @@ export default class BarraPrincipal extends Component {
                         ConsulTec
                     </a>
                     <div class="inline-flex items-end h-full ml-5 lg:w-2/5 lg:justify-end lg:ml-auto">
-                        <a href="#_" class="px-8 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-gray-700 rounded shadow outline-none active:bg-gray-900 hover:shadow-md focus:outline-none">
+                        <button class="px-8 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-gray-700 rounded shadow outline-none active:bg-gray-900 hover:shadow-md focus:outline-none">
                             Registrarse
-                        </a>
+                        </button>
                     </div>
                 </div>
             </header>

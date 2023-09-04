@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/authContext';
 
 import LoginContainer from './containers/LoginContainer';
 import HomeContainer from './containers/HomeContainer';
 import RegisterContainer from './containers/RegisterContainer';
-import { AuthProvider } from './context/authContext';
 
 function App() {
 

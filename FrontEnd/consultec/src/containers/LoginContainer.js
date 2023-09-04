@@ -32,6 +32,10 @@ function LoginContainer() {
             });
     };
 
+    const handleRegister = () => {
+        navigate('/register');
+    }
+
     return (
         <LoginView
             email={email}
@@ -39,6 +43,7 @@ function LoginContainer() {
             onEmailChange={handleEmailChange}
             onPasswordChange={handlePasswordChange}
             onLogin={handleLogin}
+            onRegister={handleRegister}
         />
     );
 }
