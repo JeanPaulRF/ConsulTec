@@ -24,12 +24,11 @@ function LoginContainer() {
             .then((userCredential) => {
                 // Signed in
                 console.log(userCredential);
-
+                navigate("/home");
             })
             .catch((error) => {
                 alert('Usuario o contraseña incorrectos');
                 console.log(error);
-                navigate("/home");
             });
     };
 
