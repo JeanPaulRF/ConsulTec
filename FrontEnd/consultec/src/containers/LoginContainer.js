@@ -33,7 +33,7 @@ function LoginContainer() {
     };
 
     const handleRegister = () => {
-        navigate('/home');
+        navigate('/register');
     }
 
     const handleForgetPassword = () => {
