@@ -33,7 +33,7 @@ function LoginContainer() {
     };
 
     const handleRegister = () => {
-        navigate('/register');
+        navigate('/home');
     }
 
     return (

@@ -1,9 +1,13 @@
 import React from 'react';
+import HomeView from '../views/HomeView';
 
-const Home = () => {
+function HomeContainer  ()  {
     return (
-        <p>Esta es la página de inicio</p>
+      <div>
+        <HomeView/>
+
+      </div>
     );
 };
 
-export default Home;
+export default HomeContainer;

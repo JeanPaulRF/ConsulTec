@@ -7,16 +7,15 @@ import HomeContainer from './containers/HomeContainer';
 import RegisterContainer from './containers/RegisterContainer';
 
 function App() {
-
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/home" component={HomeContainer} />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
-        </Routes >
+          <Route path="/home" element={<HomeContainer />} />
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   );
