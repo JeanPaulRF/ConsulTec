@@ -22,40 +22,37 @@ function HomeView({onClickMaterial}){
                     </div>
                 </div>
             </header>
-   
             <h1 style={{ fontSize: '1.6rem', textAlign: 'center' }}>Seleccione un curso a consultar: </h1>
             <div className="flex h-screen w-full items-center justify-center bg-cover bg-no-repeat">
-              <div className="rounded-xl bg-gray-800 bg-opacity-50 px-12 py-10 shadow-lg backdrop-blur-md max-sm:px-8 mt-[40px] ">    
+                <div className="rounded-xl bg-gray-800 bg-opacity-50 px-12 py-10 shadow-lg backdrop-blur-md max-sm:px-8 mt-[40px] ">    
                     <div>
-                        <div>
-                            <img src={mateGe} alt="mate general" style={{ width: '200px', height: '150px'}} />
-                           <button onClick={onClickMaterial}>
+                        <div onClick={onClickMaterial}>
+                            <img src={mateGe} alt="Matemática General" style={{ width: '200px', height: '150px'}} />
+                            <button >
                             Matemática general
                             </button> 
                         </div> 
-                        <div>
-                            <img src={calculo} alt="mate general" style={{ width: '200px', height: '150px'  }} />
-                            <button onClick={onClickMaterial}>
+                        <div onClick={onClickMaterial}>
+                            <img src={calculo} alt="Calculo" style={{ width: '200px', height: '150px'  }} />
+                            <button >
                             Cálculo Diferencial e Integral
                             </button> 
                         </div> 
-                        <div>
-                            <img src={algebra} alt="mate general" style={{ width: '200px', height: '150px'}} />                           
-                            <button onClick={onClickMaterial}>
+                        <div onClick={onClickMaterial}>
+                            <img src={algebra} alt="Algebra" style={{ width: '200px', height: '150px'}} />                           
+                            <button >
                             Álgebra Lineal
                             </button> 
                         </div> 
-                        <div>
-                            <img src={estadistica} alt="mate general" style={{ width: '200px', height: '150px' }} />
-                            <button onClick={onClickMaterial}>
+                        <div onClick={onClickMaterial}>
+                            <img src={estadistica} alt="Estadística" style={{ width: '200px', height: '150px' }} />
+                            <button >
                             Estadística
                             </button> 
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     )
 
