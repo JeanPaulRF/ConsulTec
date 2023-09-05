@@ -53,6 +53,10 @@ function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, 
                                 <button 
                                 className="text-gray-300"
                                 onClick={forgetPassword}
+                                title={!(email !== "") ? 
+                                    "Debes ingregar un correo en usuario para solicitar un cambio de contraseña"
+                                    :
+                                    `Te enviaremos un correo para que actualices tu contraseña a ${email}`}
                                 >
                                     ¿Olvidó su contraseña?
                                 </button>

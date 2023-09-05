@@ -37,7 +37,8 @@ function LoginContainer() {
     }
 
     const handleForgetPassword = () => {
-        sendPasswordResetEmail(auth, email)
+        if(email !== ""){
+            sendPasswordResetEmail(auth, email)
             .then(() => {
                 alert("Te hemos enviado un correo para que actualices tu contraseña");
                 handlePasswordChange("");
@@ -47,6 +48,10 @@ function LoginContainer() {
                 console.error(`Error code ${error.code}: ${error.message}`);
                 handleEmailChange("");
             });
+        } else {
+            alert("Ingresa un correo en usuario para que podamos ayudarte")
+        }
+        
     }
 
     return (
