@@ -39,10 +39,13 @@ function LoginContainer() {
     const handleForgetPassword = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                alert("Te hemos enviado un correo para que actualices tu contraseña")
+                alert("Te hemos enviado un correo para que actualices tu contraseña");
+                handlePasswordChange("");
             })
             .catch((error) => {
-                console.error(`Error code ${error.code}: ${error.message}`)
+                alert('Error al enviar el correo, vuelve a introducir tu correo');
+                console.error(`Error code ${error.code}: ${error.message}`);
+                handleEmailChange("");
             });
     }
 
