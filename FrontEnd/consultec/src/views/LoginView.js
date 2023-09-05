@@ -1,6 +1,6 @@
 import React from 'react';
 
-function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, onRegister, forgetPassword}) {
+function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, onRegister, forgetPassword }) {
     return (
         <div style={{ backgroundImage: "url('https://th.bing.com/th/id/R.8f11c679e5dac264326985cd4419f975?rik=n%2bnPpJrHK72m9g&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fd%2f9%2f2%2f94254.jpg&ehk=rfeXjwbaITK5Sv1h0%2boMsgAN0shLtxuK5et51esIWJk%3d&risl=&pid=ImgRaw&r=0')" }}>
             <header class="w-full text-gray-700 bg-blue-400 border-t bg-opacity-50 border-gray-100 shadow-sm body-font">
@@ -30,7 +30,7 @@ function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, 
                                 <input
                                     className="rounded-3xl border-none bg-blue-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                     type="text"
-                                    placeholder="Usuario"
+                                    placeholder="Correo"
                                     value={email}
                                     onChange={(e) => onEmailChange(e.target.value)}
                                 />
@@ -54,13 +54,13 @@ function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, 
                                 </button>
                             </div>
                             <div className="mb-0 py-4 flex flex-col items-center">
-                                <button 
-                                className="text-gray-300"
-                                onClick={forgetPassword}
-                                title={!(email !== "") ? 
-                                    "Debes ingregar un correo en usuario para solicitar un cambio de contraseña"
-                                    :
-                                    `Te enviaremos un correo para que actualices tu contraseña a ${email}`}
+                                <button
+                                    className="text-gray-300"
+                                    onClick={forgetPassword}
+                                    title={!(email !== "") ?
+                                        "Se debe ingresar un correo en usuario para solicitar un cambio de contraseña"
+                                        :
+                                        `Te enviaremos un correo para que actualices tu contraseña a ${email}`}
                                 >
                                     ¿Olvidó su contraseña?
                                 </button>

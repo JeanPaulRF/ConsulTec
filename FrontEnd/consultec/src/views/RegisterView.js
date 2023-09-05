@@ -22,7 +22,9 @@ function RegisterView({ error, handleSubmit, handleChange, email, password, goLo
         <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-12 shadow-lg backdrop-blur-md max-sm:px-8 mt-[-80px]">
           <div className="text-white text-center">
             <form onSubmit={handleSubmit}>
-              <label className=" text-lg"> Ingrese sus datos </label>
+              <div className="mb-0 py-4 flex flex-col items-center text-2xl">
+                <p className="text-gray-300">Ingrese sus datos</p>
+              </div>
               <div className="mb-4 text-lg">
                 <input
                   className="rounded-3xl border-none bg-blue-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
