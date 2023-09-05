@@ -22,6 +22,10 @@ function LoginView({ email, password, onEmailChange, onPasswordChange, onLogin, 
                 <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8 mt-[-80px]">
                     <div className="text-white">
                         <form action="#">
+                            <div className="mb-0 py-4 flex flex-col items-center text-2xl">
+                                <p className="text-gray-300">Inicio de Sesión</p>
+                            </div>
+
                             <div className="mb-4 text-lg">
                                 <input
                                     className="rounded-3xl border-none bg-blue-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
