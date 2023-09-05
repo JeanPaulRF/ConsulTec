@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword,  sendPasswordResetEmail} from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,6 +36,16 @@ function LoginContainer() {
         navigate('/register');
     }
 
+    const handleForgetPassword = () => {
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert("Te hemos enviado un correo para que actualices tu contraseña")
+            })
+            .catch((error) => {
+                console.error(`Error code ${error.code}: ${error.message}`)
+            });
+    }
+
     return (
         <LoginView
             email={email}
@@ -44,6 +54,7 @@ function LoginContainer() {
             onPasswordChange={handlePasswordChange}
             onLogin={handleLogin}
             onRegister={handleRegister}
+            forgetPassword={handleForgetPassword}
         />
     );
 }
