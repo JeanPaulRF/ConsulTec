@@ -23,7 +23,7 @@ function HomeView({onClickMaterial}){
                 </div>
             </header>
             <h1 style={{ fontSize: '1.6rem', textAlign: 'center' }}>Seleccione un curso a consultar: </h1>
-            <div className="flex flex-wrap flex-row h-screen w-full items-center justify-center bg-cover bg-no-repeat">
+            <div className="flex flex-wrap flex-row h-screen w-full  justify-center bg-cover bg-no-repeat h-auto">
                 <div className="rounded-xl bg-gray-800 bg-opacity-50 px-12 py-10 shadow-lg backdrop-blur-md max-sm:px-8 mt-[40px] ">    
                     <div className="flex flex-wrap">
                         <div onClick={onClickMaterial} className="mx-2">
