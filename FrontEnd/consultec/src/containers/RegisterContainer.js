@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../context/authContext"
 import { useNavigate } from "react-router-dom"
 
+import RegisterView from "../views/RegisterView";
+
 
 function RegisterContainer() {
 
@@ -18,46 +20,41 @@ function RegisterContainer() {
     setUser({ ...user, [name]: value })
   }
 
+  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.acr\.cr)$/;
+
+  const correoValido = formatoValido.test(user.email);
+
   const handleSubmit = async e => {
     e.preventDefault()
-    setError("")
-    try {
-      await signup(user.email, user.password)
-      navigate('/login')
-    } catch (error) {
-        setError(error.message);
+    setError("");
+
+    if (!correoValido) {
+      alert("Por favor utiliza un correo @estudiantec.cr para estudiantes o @itcr.ac.cr para profesores");
     }
+    else {
+      try {
+            await signup(user.email, user.password)
+            navigate('/login')
+          } catch (error) {
+              setError(error.message);
+              alert("Usuario o contraseña incorrectos")
+          }
+    }
+    
   }
 
+  const goLogin = e => navigate('/login')
+
   return (
-
-    <div>
-      {error && <p>{error}</p>}
-
-      <form onSubmit={handleSubmit}>
-
-        <label htmlFor="email"> Email </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="micorreo@direccion.com"
-          onChange={handleChange}
-        />
-
-        <label htmlFor="password"> Contraseña </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="******"
-          onChange={handleChange}
-        />
-
-
-        <button>Registrarse</button>
-      </form>
-    </div>
-  )
+    <RegisterView
+      error={error}
+      email={user.email}
+      password={user.password}
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+      goLogin={goLogin}
+    />
+  );
 }
 
 export default RegisterContainer;
