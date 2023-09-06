@@ -22,7 +22,8 @@ function HomeContainer  ()  {
       <div>
         <HomeView
         onClickMaterial={handleMaterial}
-        
+        handleChangePassword={handleChangePassword}
+        handleLogout={handleLogout}
         />
 
       </div>
