@@ -5,6 +5,7 @@ import { AuthProvider } from './context/authContext';
 import LoginContainer from './containers/LoginContainer';
 import HomeContainer from './containers/HomeContainer';
 import RegisterContainer from './containers/RegisterContainer';
+import PasswordContainer from './containers/PasswordContainer';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/register" element={<RegisterContainer />} />
           <Route path="/home" element={<HomeContainer />} />
+          <Route path='/password' element={<PasswordContainer/>}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

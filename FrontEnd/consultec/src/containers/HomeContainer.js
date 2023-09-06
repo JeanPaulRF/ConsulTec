@@ -7,14 +7,23 @@ function HomeContainer  ()  {
     const navigate = useNavigate();
 
     const handleMaterial = () => {
-        navigate('/login');
+      navigate('/login');
+    }
+
+    const handleChangePassword = () => {
+      navigate('/password')
+    }
+
+    const handleLogout = () => {
+      navigate('/login')
     }
 
     return (
       <div>
         <HomeView
         onClickMaterial={handleMaterial}
-        
+        handleChangePassword={handleChangePassword}
+        handleLogout={handleLogout}
         />
 
       </div>
