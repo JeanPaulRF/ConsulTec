@@ -6,7 +6,7 @@ function PasswordView({ handleSubmit, handleNewPassword, handleNewPasswordConfir
     <div style={{ backgroundImage: "url('https://th.bing.com/th/id/R.8f11c679e5dac264326985cd4419f975?rik=n%2bnPpJrHK72m9g&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fd%2f9%2f2%2f94254.jpg&ehk=rfeXjwbaITK5Sv1h0%2boMsgAN0shLtxuK5et51esIWJk%3d&risl=&pid=ImgRaw&r=0')" }}>
       <header class="w-full text-gray-700 bg-blue-400 border-t bg-opacity-50 border-gray-100 shadow-sm body-font">
         <div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
-          <a href="#_" class="flex items-center order-first mb-4 text-4xl font-semibold text-gray-900 lg:order-none lg:w-1/5 title-font lg:items-start lg:justify-start md:mb-0">
+          <a href="/home" class="flex items-center order-first mb-4 text-4xl font-semibold text-gray-900 lg:order-none lg:w-1/5 title-font lg:items-start lg:justify-start md:mb-0">
             ConsulTec
           </a>
           <div class="inline-flex items-end h-full ml-5 lg:w-2/5 lg:justify-end lg:ml-auto">
@@ -39,7 +39,7 @@ function PasswordView({ handleSubmit, handleNewPassword, handleNewPasswordConfir
                   className="rounded-3xl border-none bg-blue-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                   type="password"
                   name="newPasswordConfirm"
-                  placeholder="Confirma la nueva contraseña"
+                  placeholder="Confirma la contraseña"
                   value={newPasswordConfirm}
                   onChange={handleNewPasswordConfirmChange}
                 />
