@@ -21,9 +21,16 @@ function PasswordContainer() {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if (newPassword!== "" 
-    && newPassword.length > 5 
-    && newPassword===newPasswordConfirm) {
+    if (newPassword === "") {
+      alert(`La contraseña no puede estar vacia`);
+    }
+    else if (newPassword.length < 6) {
+      alert(`La contraseña debe tener al menos 6 caracteres`);
+    }
+    else if (newPassword !== newPasswordConfirm) {
+      alert(`Las contraseñas no coinciden`);
+    }
+    else {
       updatePassword(auth.currentUser, newPassword)
         .then(() => {
           alert("Contraseña actualizada");
@@ -33,12 +40,7 @@ function PasswordContainer() {
           alert(`Error en el servidor, intentalo más tarde`);
           console.error(`Error: ${error}`)
         })
-      
     }
-    else {
-      alert(`No conciden las contraseñas o están vacías`);
-    }
-    
   }
 
   const goHome = e => navigate('/home')
