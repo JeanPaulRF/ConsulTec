@@ -7,7 +7,15 @@ function HomeContainer  ()  {
     const navigate = useNavigate();
 
     const handleMaterial = () => {
-        navigate('/login');
+      navigate('/login');
+    }
+
+    const handleChangePassword = () => {
+      navigate('/password')
+    }
+
+    const handleLogout = () => {
+      navigate('/login')
     }
 
     return (
