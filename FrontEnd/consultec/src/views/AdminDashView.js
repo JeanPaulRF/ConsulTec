@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+
 import SideBarAdmin from '../components/SideBarAdmin';
+import DynamicForm from '../components/DynamicForm';
 
 // components
 
-function AdminDashView({ handleLogout }) {
+function AdminDashView({ handleLogout, selectedOption, onOptionChange }) {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -44,7 +46,18 @@ function AdminDashView({ handleLogout }) {
         </div>
       </header>
 
-      <SideBarAdmin />
+      <div className='flex'>
+
+        <SideBarAdmin
+          selectedOption={selectedOption}
+          onOptionChange={onOptionChange}
+        />
+
+        <DynamicForm
+          selectedOption={selectedOption}
+        />
+
+      </div>
 
     </div>
   )
