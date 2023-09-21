@@ -23,8 +23,13 @@ function LoginContainer() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
+                if(userCredential.user.email === "admin@admin.com"){
+                    navigate("/admin");
+                }
+                else{
+                    navigate("/home");
+                }
                 console.log(userCredential);
-                navigate("/home");
             })
             .catch((error) => {
                 alert('Usuario o contraseña incorrectos');

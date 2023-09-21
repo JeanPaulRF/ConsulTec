@@ -3,7 +3,6 @@ import mateGe from "../images/mateGeneral.jpg"
 import calculo from "../images/calculo.jpg"
 import algebra from "../images/algebra.jpg"
 import estadistica from "../images/estadistica.jpg"
-import BarraPrincipal from "../components/BarraPrincipal";
 
 
 function HomeView({ onClickMaterial, handleChangePassword, handleLogout }) {

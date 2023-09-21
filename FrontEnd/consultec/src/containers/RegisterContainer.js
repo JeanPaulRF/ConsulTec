@@ -33,14 +33,14 @@ function RegisterContainer() {
     }
     else {
       try {
-            await signup(user.email, user.password)
-            navigate('/login')
-          } catch (error) {
-              setError(error.message);
-              alert("Usuario o contraseña incorrectos")
-          }
+        await signup(user.email, user.password)
+        navigate('/login')
+      } catch (error) {
+        setError(error.message);
+        alert("Usuario o contraseña incorrectos")
+      }
     }
-    
+
   }
 
   const goLogin = e => navigate('/login')
