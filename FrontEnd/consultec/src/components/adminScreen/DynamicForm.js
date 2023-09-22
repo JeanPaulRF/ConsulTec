@@ -9,7 +9,7 @@ import UsuarioForm from './UsuarioForm';
 function DynamicForm({ selectedOption }) {
     return (
         <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-1/6">
-            <div className='flex flex-col p-4 ml-4'>
+            <div className='flex flex-col p-6 ml-4'>
                 {selectedOption === 'curso' ? <CursoForm /> : null}
                 {selectedOption === 'tema' ? <TemaForm /> : null}
                 {selectedOption === 'subtema' ? <SubtemaForm /> : null}

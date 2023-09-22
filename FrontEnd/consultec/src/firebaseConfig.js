@@ -1,10 +1,9 @@
-// Import the functions you need from the SDKs you need
+// Importa las funciones que necesitas de los SDKs que necesitas
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
+// Tu configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAN40i5IP9HuRTl5bDFF4HbnXLCKo1qyQA",
     authDomain: "consulta-tec.firebaseapp.com",
@@ -14,7 +13,10 @@ const firebaseConfig = {
     appId: "1:1091023132943:web:160aabe43bbdaa4ee0067a"
 };
 
-// Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-export const auth = getAuth(firebaseApp);
+// Exporta la instancia de autenticación y Cloud Firestore
+export { app, auth, db };

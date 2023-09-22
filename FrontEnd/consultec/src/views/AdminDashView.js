@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import SideBarAdmin from '../components/SideBarAdmin';
-import DynamicForm from '../components/DynamicForm';
+import SideBarAdmin from '../components/adminScreen/SideBarAdmin';
+import DynamicDisplayList from '../components/adminScreen/DynamicDisplayList';
+import ButtonAdd from '../components/adminScreen/ButtonAdd';
 
 // components
 
@@ -53,7 +54,11 @@ function AdminDashView({ handleLogout, selectedOption, onOptionChange }) {
           onOptionChange={onOptionChange}
         />
 
-        <DynamicForm
+        <DynamicDisplayList
+          selectedOption={selectedOption}
+        />
+
+        <ButtonAdd
           selectedOption={selectedOption}
         />
 
