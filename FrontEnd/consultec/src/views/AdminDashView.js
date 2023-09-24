@@ -7,7 +7,13 @@ import ButtonAdd from '../components/adminScreen/ButtonAdd';
 // components
 
 function AdminDashView({ handleLogout, selectedOption, onOptionChange }) {
+  const [refreshList, setRefreshList] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  const refreshDynamicDisplayList = () => {
+    setRefreshList(!refreshList);
+  };
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -56,10 +62,12 @@ function AdminDashView({ handleLogout, selectedOption, onOptionChange }) {
 
         <DynamicDisplayList
           selectedOption={selectedOption}
+          refreshList={refreshList}
         />
 
         <ButtonAdd
           selectedOption={selectedOption}
+          refreshDynamicDisplayList={refreshDynamicDisplayList}
         />
 
       </div>

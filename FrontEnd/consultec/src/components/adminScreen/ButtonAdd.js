@@ -8,7 +8,7 @@ import ResumenForm from './ResumenForm';
 import EjemploForm from './EjemploForm';
 import UsuarioForm from './UsuarioForm';
 
-function ButtonAdd({ selectedOption }) {
+function ButtonAdd({ selectedOption, refreshDynamicDisplayList }) {
     const [showButton, setShowButton] = useState(true);
     const [showForm, setShowForm] = useState(false);
 
@@ -23,6 +23,7 @@ function ButtonAdd({ selectedOption }) {
         // Después de agregar, puedes restablecer el estado para mostrar el botón nuevamente
         setShowButton(true);
         setShowForm(false);
+        refreshDynamicDisplayList();
     };
     return (
         <div>
@@ -36,14 +37,13 @@ function ButtonAdd({ selectedOption }) {
             )}
 
             {showForm && (
-                <form onSubmit={handleFormSubmit}>
-                    {selectedOption === 'curso' ? <CursoForm /> : null}
-                    {selectedOption === 'tema' ? <TemaForm /> : null}
-                    {selectedOption === 'subtema' ? <SubtemaForm /> : null}
-                    {selectedOption === 'resumen' ? <ResumenForm /> : null}
-                    {selectedOption === 'ejemplo' ? <EjemploForm /> : null}
-                    {selectedOption === 'usuario' ? <UsuarioForm /> : null}
-                    <button type="submit" className="bg-green-400">Guardar</button>
+                <form>
+                    {selectedOption === 'curso' ? <CursoForm onSubmit={handleFormSubmit}/> : null}
+                    {selectedOption === 'tema' ? <TemaForm onSubmit={handleFormSubmit}/> : null}
+                    {selectedOption === 'subtema' ? <SubtemaForm onSubmit={handleFormSubmit}/> : null}
+                    {selectedOption === 'resumen' ? <ResumenForm onSubmit={handleFormSubmit}/> : null}
+                    {selectedOption === 'ejemplo' ? <EjemploForm onSubmit={handleFormSubmit}/> : null}
+                    {selectedOption === 'usuario' ? <UsuarioForm onSubmit={handleFormSubmit}/> : null}
                 </form>
             )}
         </div>
