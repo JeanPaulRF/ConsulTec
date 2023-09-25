@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { app } from '../../firebaseConfig';
 import { getFirestore, collection, query, getDocs } from "firebase/firestore";
 
-const CursoList = ({refreshList}) => {
+const CursoList = ({ refreshList }) => {
   const db = getFirestore(app);
   const [cursos, setCursos] = useState([]);
 
@@ -26,8 +26,9 @@ const CursoList = ({refreshList}) => {
     <div>
       <ul>
         {cursos.map((curso) => (
-          <li key={curso.id}>{curso.nombre}</li>
-          // Puedes mostrar otros campos del curso según tus necesidades
+          <li
+            className='my-2 p-2'
+            key={curso.id}>{curso.nombre}</li>
         ))}
       </ul>
     </div>
