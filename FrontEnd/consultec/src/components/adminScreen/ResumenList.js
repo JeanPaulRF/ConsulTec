@@ -26,7 +26,7 @@ const ResumenList = ({ refreshList }) => {
     <div>
       <ul>
         {resumens.map((resumen) => (
-          <li key={resumen.id}>{resumen.nombre}</li>
+          <li className='my-2 p-2' key={resumen.id}>{resumen.nombre}</li>
           // Puedes mostrar otros campos del resumen según tus necesidades
         ))}
       </ul>

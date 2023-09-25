@@ -26,7 +26,7 @@ const TemaList = ({ refreshList}) => {
     <div>
       <ul>
         {temas.map((tema) => (
-          <li key={tema.id}>{tema.nombre}</li>
+          <li className='my-2 p-2' key={tema.id}>{tema.nombre}</li>
           // Puedes mostrar otros campos del tema según tus necesidades
         ))}
       </ul>

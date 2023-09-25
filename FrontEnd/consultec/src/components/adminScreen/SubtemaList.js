@@ -26,7 +26,7 @@ const SubtemaList = ({ refreshList }) => {
         <div>
             <ul>
                 {subtemas.map((subtema) => (
-                    <li key={subtema.id}>{subtema.nombre}</li>
+                    <li className='my-2 p-2' key={subtema.id}>{subtema.nombre}</li>
                     // Puedes mostrar otros campos del subtema según tus necesidades
                 ))}
             </ul>

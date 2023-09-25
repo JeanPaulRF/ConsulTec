@@ -71,11 +71,14 @@ function TemaForm({ onSubmit }) {
   };
 
   return (
-    <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-1/3">
+    <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-60">
       <div className="flex flex-col p-6">
+
         <form>
-          <label>
-            Nombre del Tema:
+          <div style={{ display: 'block' }}>
+            <label>
+              Nombre del Tema:
+            </label>
             <input
               type="text"
               value={nombre}
@@ -83,9 +86,11 @@ function TemaForm({ onSubmit }) {
               required
               className="text-black my-2"
             />
-          </label>
-          <label>
-            Curso:
+          </div>
+          <div style={{ display: 'block' }}>
+            <label>
+              Curso:
+            </label>
             <select
               value={selectedCurso}
               onChange={handleCursoChange}
@@ -99,7 +104,8 @@ function TemaForm({ onSubmit }) {
                 </option>
               ))}
             </select>
-          </label>
+          </div>
+
           <button
             type="button"
             onClick={handleSubmit}

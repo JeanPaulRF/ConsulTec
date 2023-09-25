@@ -26,7 +26,7 @@ const UsuarioList = ({ refreshList }) => {
     <div>
       <ul>
         {usuarios.map((usuario) => (
-          <li key={usuario.id}>{usuario.nombre}</li>
+          <li className='my-2 p-2' key={usuario.id}>{usuario.nombre}</li>
           // Puedes mostrar otros campos del usuario según tus necesidades
         ))}
       </ul>

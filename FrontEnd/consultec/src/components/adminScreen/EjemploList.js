@@ -26,7 +26,7 @@ const EjemploList = ({ refreshList}) => {
     <div>
       <ul>
         {ejemplos.map((ejemplo) => (
-          <li key={ejemplo.id}>{ejemplo.nombre}</li>
+          <li className='my-2 p-2' key={ejemplo.id}>{ejemplo.nombre}</li>
           // Puedes mostrar otros campos del ejemplo según tus necesidades
         ))}
       </ul>
