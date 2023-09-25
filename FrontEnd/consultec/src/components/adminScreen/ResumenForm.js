@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db, storage } from '../../firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 
 function ResumenForm({ onSubmit }) {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [pdfFile, setPdfFile] = useState(null); // Nuevo estado para almacenar el archivo PDF
+  const [selectedSubtema, setSelectedSubtema] = useState('');
+  const [subtemas, setSubtemas] = useState([]);
+
+  useEffect(() => {
+    // Obtener la lista de subtemas disponibles desde Firebase
+    const getSubtemas = async () => {
+      const subtemasSnapshot = await getDocs(collection(db, 'subtema'));
+      const subtemasData = subtemasSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        nombre: doc.data().nombre,
+      }));
+      setSubtemas(subtemasData);
+    };
+
+    getSubtemas();
+  }, []);
 
   const handleNombreChange = (e) => {
     setNombre(e.target.value);
+  };
+
+  const handleSubtemaChange = (e) => {
+    setSelectedSubtema(e.target.value);
   };
 
   const handleDescripcionChange = (e) => {
@@ -100,6 +120,25 @@ function ResumenForm({ onSubmit }) {
             />
           </div>
           <div style={{ display: 'block' }}>
+            <label className='mr-3'>
+              Subtema:
+            </label>
+            <select
+              value={selectedSubtema}
+              onChange={handleSubtemaChange}
+              required
+              className="text-black my-2"
+            >
+              <option value="">Selecciona un tema</option>
+              {subtemas.map((tema) => (
+                <option key={tema.id} value={tema.id}>
+                  {tema.nombre}
+                </option>
+              ))}
+            </select>
+
+          </div>
+          <div style={{ display: 'block' }}>
             <label>
               Subir PDF:
             </label>
@@ -111,6 +150,7 @@ function ResumenForm({ onSubmit }) {
               className="text-black my-2"
             />
           </div>
+
           <button
             type="button"
             onClick={handleSubmit}
@@ -118,6 +158,7 @@ function ResumenForm({ onSubmit }) {
           >
             Guardar
           </button>
+
           <button
             type="button"
             onClick={onCancel}
