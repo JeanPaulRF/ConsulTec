@@ -7,6 +7,7 @@ import SubtemaForm from './SubtemaForm';
 import ResumenForm from './ResumenForm';
 import EjemploForm from './EjemploForm';
 import UsuarioForm from './UsuarioForm';
+import ConsultaForm from './ConsultaForm';
 
 function ButtonAdd({ selectedOption, refreshDynamicDisplayList }) {
     const [showButton, setShowButton] = useState(true);
@@ -41,6 +42,7 @@ function ButtonAdd({ selectedOption, refreshDynamicDisplayList }) {
                     {selectedOption === 'curso' ? <CursoForm onSubmit={handleFormSubmit}/> : null}
                     {selectedOption === 'tema' ? <TemaForm onSubmit={handleFormSubmit}/> : null}
                     {selectedOption === 'subtema' ? <SubtemaForm onSubmit={handleFormSubmit}/> : null}
+                    {selectedOption === 'consulta' ? <ConsultaForm onSubmit={handleFormSubmit}/> : null}
                     {selectedOption === 'resumen' ? <ResumenForm onSubmit={handleFormSubmit}/> : null}
                     {selectedOption === 'ejemplo' ? <EjemploForm onSubmit={handleFormSubmit}/> : null}
                     {selectedOption === 'usuario' ? <UsuarioForm onSubmit={handleFormSubmit}/> : null}

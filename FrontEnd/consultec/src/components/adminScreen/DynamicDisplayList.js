@@ -5,6 +5,7 @@ import SubtemaList from './SubtemaList';
 import ResumenList from './ResumenList';
 import EjemploList from './EjemploList';
 import UsuarioList from './UsuarioList';
+import ConsultaList from './ConsultaList';
 
 function DynamicDisplayList({ selectedOption, refreshList }) {
     
@@ -14,6 +15,7 @@ function DynamicDisplayList({ selectedOption, refreshList }) {
                 {selectedOption === 'curso' ? <CursoList refreshList={refreshList} /> : null}
                 {selectedOption === 'tema' ? <TemaList refreshList={refreshList}/> : null}
                 {selectedOption === 'subtema' ? <SubtemaList refreshList={refreshList}/> : null}
+                {selectedOption === 'consulta' ? <ConsultaList refreshList={refreshList}/> : null}
                 {selectedOption === 'resumen' ? <ResumenList refreshList={refreshList}/> : null}
                 {selectedOption === 'ejemplo' ? <EjemploList refreshList={refreshList}/> : null}
                 {selectedOption === 'usuario' ? <UsuarioList refreshList={refreshList}/> : null}

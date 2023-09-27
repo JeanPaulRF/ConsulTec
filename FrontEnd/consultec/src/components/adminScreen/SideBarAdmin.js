@@ -30,6 +30,14 @@ function SideBarAdmin({ selectedOption, onOptionChange }) {
                     Subtemas
                 </li>
                 <li
+                    className={`my-2 hover:bg-gray-700 p-2 cursor-pointer ${selectedOption === 'consulta' ? 'bg-gray-700' : ''
+                        }`}
+                    onClick={() => handleOptionClick('consulta')}
+                >
+                    Consultas
+                </li>
+                
+                <li
                     className={`my-2 hover:bg-gray-700 p-2 cursor-pointer ${selectedOption === 'resumen' ? 'bg-gray-700' : ''
                         }`}
                     onClick={() => handleOptionClick('resumen')}

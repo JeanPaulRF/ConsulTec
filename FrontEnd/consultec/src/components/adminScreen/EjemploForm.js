@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db, storage } from '../../firebaseConfig';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
+import { collection, addDoc, getDocs, doc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL} from 'firebase/storage';
 
 function EjemploForm({ onSubmit }) {
   const [nombre, setNombre] = useState('');
@@ -44,25 +44,29 @@ function EjemploForm({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (nombre === '' || descripcion === '' || pdfFile === null) {
+    if (nombre === '' || descripcion === '' || pdfFile === null || selectedSubtema === '') {
       alert('No puede haber campos vacíos');
       return;
     }
 
     try {
+      // Obtener la referencia del subtema seleccionado por su ID
+      const subtemaRef = doc(db, 'subtema', selectedSubtema);
+
       // Cargar el archivo PDF a Firebase Storage
       const uniqueFileName = `${Date.now()}_${pdfFile.name}`;
       const storageRef = ref(storage, `ejemploes/${uniqueFileName}`);
       await uploadBytes(storageRef, pdfFile);
 
       // Obtener la URL de descarga del archivo PDF
-      const pdfURL = await storageRef.getDownloadURL();
+      const pdfURL = await getDownloadURL(storageRef);
 
       // Guardar los datos en Firestore, incluida la URL del PDF
       await addDoc(collection(db, 'ejemplo'), {
         nombre: nombre,
         descripcion: descripcion,
         pdfURL: pdfURL,
+        subtemaRef: subtemaRef, // Establece la referencia al subtema
       });
 
       // Llama a la función onSubmit para ejecutarla en ButtonAdd
@@ -129,7 +133,7 @@ function EjemploForm({ onSubmit }) {
               required
               className="text-black my-2"
             >
-              <option value="">Selecciona un tema</option>
+              <option value="">Selecciona un subtema</option>
               {subtemas.map((tema) => (
                 <option key={tema.id} value={tema.id}>
                   {tema.nombre}
@@ -147,7 +151,7 @@ function EjemploForm({ onSubmit }) {
               accept=".pdf"
               onChange={handlePDFChange}
               required
-              className="text-black my-2"
+              className="text-white my-2"
             />
           </div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { app } from '../../firebaseConfig';
+import { app, storage } from '../../firebaseConfig';
 import { getFirestore, collection, query, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { ref, deleteObject } from 'firebase/storage'; // Importa las funciones de almacenamiento
 
 const EjemploList = ({ refreshList }) => {
   const db = getFirestore(app);
@@ -20,10 +21,19 @@ const EjemploList = ({ refreshList }) => {
     getEjemplos();
   }, [db, refreshList]);
 
-  const handleDeleteEjemplo = async (ejemploId) => {
+  const handleDeleteEjemplo = async (ejemploId, pdfURL) => {
     try {
       const ejemploDocRef = doc(db, "ejemplo", ejemploId);
+
+      // Elimina el documento de Firestore
       await deleteDoc(ejemploDocRef);
+
+      // Obtén una referencia al archivo en Firebase Storage usando la URL almacenada en Firestore
+      const storageRef = ref(storage, pdfURL);
+
+      // Elimina el archivo en Firebase Storage
+      await deleteObject(storageRef);
+
       // Actualiza la lista después de eliminar el ejemplo
       setEjemplos(ejemplos.filter((ejemplo) => ejemplo.id !== ejemploId));
     } catch (error) {
@@ -51,7 +61,7 @@ const EjemploList = ({ refreshList }) => {
                 <button onClick={() => handleEditEjemplo(ejemplo.id)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
                   Editar
                 </button>
-                <button onClick={() => handleDeleteEjemplo(ejemplo.id)} className="bg-red-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-red-700 hover:bg-opacity-70">
+                <button onClick={() => handleDeleteEjemplo(ejemplo.id, ejemplo.pdfURL)} className="bg-red-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-red-700 hover:bg-opacity-70">
                   Eliminar
                 </button>
               </div>
