@@ -1,48 +1,60 @@
 import React, { useState } from 'react'
 import { db } from '../../firebaseConfig';
 import { collection, addDoc } from "firebase/firestore";
+import { useAuth } from "../../context/authContext";
 
-function UsuarioForm({ onSubmit }) {
-  const [nombre, setNombre] = useState('');
+function UsuarioForm( { onSubmit } ) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState()
 
-  const handleNombreChange = (e) => {
-    setNombre(e.target.value);
+  const { signup } = useAuth()
+  const [error, setError] = useState();
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  
+  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.ac\.cr)$/;
+
+  const correoValido = formatoValido.test(email);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    if (nombre === '') {
+    if (email === '') {
       alert('No puede haber campos vacíos');
+      return;
+    }
+
+    if (!correoValido) {
+      alert("Por favor utiliza un correo @estudiantec.cr para estudiantes o @itcr.ac.cr para profesores");
       return;
     }
 
     try {
       // Guarda los datos en Firebase
-      await addDoc(collection(db, 'usuario'), {
-        nombre: nombre,
-      });
-
-      // Llama a la función onSubmit para ejecutarla en ButtonAdd
-      if (onSubmit) {
-        onSubmit(e);
-      }
-
-      // Limpia el formulario o realiza otras acciones según tus necesidades
-      setNombre('');
-
+      
+      await signup(email, password)
+      alert("Usuario agregado");
     } catch (error) {
-      console.error("Error al guardar el usuario:", error);
+      setError(error.message);
+      if (error.code === 'auth/email-already-in-use') {
+        alert("El usuario ingresado ya existe. Ingrese uno distinto");
+      }
+      else {
+        alert(error.message);
+      }
     }
   };
 
   const onCancel = (e) => {
-    // Llama a la función onSubmit para ejecutarla en ButtonAdd
-    if (onSubmit) {
-      onSubmit(e);
-    }
-    // Limpia el formulario o realiza otras acciones según tus necesidades
-    setNombre('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -54,8 +66,8 @@ function UsuarioForm({ onSubmit }) {
               Correo electrónico:
               <input
                 type="text"
-                value={nombre}
-                onChange={handleNombreChange}
+                value={email}
+                onChange={handleEmailChange}
                 required
                 className='text-black my-2' />
             </label>
@@ -65,8 +77,8 @@ function UsuarioForm({ onSubmit }) {
               Contraseña:
               <input
                 type="text"
-                value={nombre}
-                onChange={handleNombreChange}
+                value={password}
+                onChange={handlePasswordChange}
                 required
                 className='text-black my-2' />
             </label>

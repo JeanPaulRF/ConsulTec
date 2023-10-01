@@ -20,7 +20,7 @@ function RegisterContainer() {
     setUser({ ...user, [name]: value })
   }
 
-  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.acr\.cr)$/;
+  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.ac\.cr)$/;
 
   const correoValido = formatoValido.test(user.email);
 
@@ -37,7 +37,13 @@ function RegisterContainer() {
         navigate('/login')
       } catch (error) {
         setError(error.message);
-        alert("Usuario o contraseña incorrectos")
+
+        if (error === 'auth/email-already-in-use') {
+          alert("El usuario insertado ya existe. Ingrese uno distinto");
+        }
+        else{
+          alert(error.message);
+        }
       }
     }
 
