@@ -22,22 +22,30 @@ const ResumenList = ({ refreshList }) => {
   }, [db, refreshList]);
 
   const handleDeleteResumen = async (resumenId, pdfURL) => {
-    try {
-      const resumenDocRef = doc(db, "resumen", resumenId);
+    // Mostrar un cuadro de diálogo de confirmación antes de eliminar el resumen
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este resumen?");
 
-      // Elimina el documento de Firestore
-      await deleteDoc(resumenDocRef);
+    if (confirmDelete) {
+      try {
+        const resumenDocRef = doc(db, "resumen", resumenId);
 
-      // Obtén una referencia al archivo en Firebase Storage usando la URL almacenada en Firestore
-      const storageRef = ref(storage, pdfURL);
+        // Elimina el documento de Firestore
+        await deleteDoc(resumenDocRef);
 
-      // Elimina el archivo en Firebase Storage
-      await deleteObject(storageRef);
+        // Obtén una referencia al archivo en Firebase Storage usando la URL almacenada en Firestore
+        const storageRef = ref(storage, pdfURL);
 
-      // Actualiza la lista después de eliminar el resumen
-      setResumens(resumens.filter((resumen) => resumen.id !== resumenId));
-    } catch (error) {
-      console.error("Error al eliminar el resumen:", error);
+        // Elimina el archivo en Firebase Storage
+        await deleteObject(storageRef);
+
+        // Actualiza la lista después de eliminar el resumen
+        setResumens(resumens.filter((resumen) => resumen.id !== resumenId));
+        console.log("Resumen y archivo eliminados exitosamente.");
+      } catch (error) {
+        console.error("Error al eliminar el resumen:", error);
+      }
+    } else {
+      console.log("Operación de eliminación cancelada.");
     }
   };
 

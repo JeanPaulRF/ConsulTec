@@ -21,13 +21,21 @@ const CursoList = ({ refreshList }) => {
   }, [db, refreshList]);
 
   const handleDeleteCurso = async (cursoId) => {
-    try {
-      const cursoDocRef = doc(db, "curso", cursoId);
-      await deleteDoc(cursoDocRef);
-      // Actualiza la lista después de eliminar el curso
-      setCursos(cursos.filter((curso) => curso.id !== cursoId));
-    } catch (error) {
-      console.error("Error al eliminar el curso:", error);
+    // Mostrar un cuadro de diálogo de confirmación antes de eliminar el curso
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este curso?");
+
+    if (confirmDelete) {
+      try {
+        const cursoDocRef = doc(db, "curso", cursoId);
+        await deleteDoc(cursoDocRef);
+        // Actualiza la lista después de eliminar el curso
+        setCursos(cursos.filter((curso) => curso.id !== cursoId));
+        console.log("Curso eliminado exitosamente.");
+      } catch (error) {
+        console.error("Error al eliminar el curso:", error);
+      }
+    } else {
+      console.log("Operación de eliminación cancelada.");
     }
   };
 
@@ -36,29 +44,29 @@ const CursoList = ({ refreshList }) => {
     console.log(`Editar curso con ID: ${cursoId}`);
   };
 
-return (
-  <div>
-    {cursos.length === 0 ? (
-      <p>No hay cursos disponibles.</p>
-    ) : (
-      <ul>
-        {cursos.map((curso) => (
-          <li className='my-2 p-2 flex justify-between items-center' key={curso.id}>
-            <div>{curso.nombre}</div>
-            <div className="flex gap-2">
-              <button onClick={() => handleEditCurso(curso.id)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
-                Editar
-              </button>
-              <button onClick={() => handleDeleteCurso(curso.id)} className="bg-red-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-red-700 hover:bg-opacity-70">
-                Eliminar
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-);
+  return (
+    <div>
+      {cursos.length === 0 ? (
+        <p>No hay cursos disponibles.</p>
+      ) : (
+        <ul>
+          {cursos.map((curso) => (
+            <li className='my-2 p-2 flex justify-between items-center' key={curso.id}>
+              <div>{curso.nombre}</div>
+              <div className="flex gap-2">
+                <button onClick={() => handleEditCurso(curso.id)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
+                  Editar
+                </button>
+                <button onClick={() => handleDeleteCurso(curso.id)} className="bg-red-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-red-700 hover:bg-opacity-70">
+                  Eliminar
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 
 };
 

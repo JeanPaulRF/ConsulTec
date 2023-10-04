@@ -21,15 +21,24 @@ const SubtemaList = ({ refreshList }) => {
     }, [db, refreshList]);
 
     const handleDeleteSubtema = async (subtemaId) => {
-        try {
-            const subtemaDocRef = doc(db, "subtema", subtemaId);
-            await deleteDoc(subtemaDocRef);
-            // Actualiza la lista después de eliminar el subtema
-            setSubtemas(subtemas.filter((subtema) => subtema.id !== subtemaId));
-        } catch (error) {
-            console.error("Error al eliminar el subtema:", error);
+        // Mostrar un cuadro de diálogo de confirmación antes de eliminar el subtema
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este subtema?");
+
+        if (confirmDelete) {
+            try {
+                const subtemaDocRef = doc(db, "subtema", subtemaId);
+                await deleteDoc(subtemaDocRef);
+                // Actualiza la lista después de eliminar el subtema
+                setSubtemas(subtemas.filter((subtema) => subtema.id !== subtemaId));
+                console.log("Subtema eliminado exitosamente.");
+            } catch (error) {
+                console.error("Error al eliminar el subtema:", error);
+            }
+        } else {
+            console.log("Operación de eliminación cancelada.");
         }
     };
+
 
     const handleEditSubtema = (subtemaId) => {
         // Agrega aquí la lógica para editar el subtema

@@ -22,22 +22,30 @@ const EjemploList = ({ refreshList }) => {
   }, [db, refreshList]);
 
   const handleDeleteEjemplo = async (ejemploId, pdfURL) => {
-    try {
-      const ejemploDocRef = doc(db, "ejemplo", ejemploId);
+    // Mostrar un cuadro de diálogo de confirmación antes de eliminar el ejemplo
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este ejemplo?");
 
-      // Elimina el documento de Firestore
-      await deleteDoc(ejemploDocRef);
+    if (confirmDelete) {
+      try {
+        const ejemploDocRef = doc(db, "ejemplo", ejemploId);
 
-      // Obtén una referencia al archivo en Firebase Storage usando la URL almacenada en Firestore
-      const storageRef = ref(storage, pdfURL);
+        // Elimina el documento de Firestore
+        await deleteDoc(ejemploDocRef);
 
-      // Elimina el archivo en Firebase Storage
-      await deleteObject(storageRef);
+        // Obtén una referencia al archivo en Firebase Storage usando la URL almacenada en Firestore
+        const storageRef = ref(storage, pdfURL);
 
-      // Actualiza la lista después de eliminar el ejemplo
-      setEjemplos(ejemplos.filter((ejemplo) => ejemplo.id !== ejemploId));
-    } catch (error) {
-      console.error("Error al eliminar el ejemplo:", error);
+        // Elimina el archivo en Firebase Storage
+        await deleteObject(storageRef);
+
+        // Actualiza la lista después de eliminar el ejemplo
+        setEjemplos(ejemplos.filter((ejemplo) => ejemplo.id !== ejemploId));
+        console.log("Ejemplo y archivo eliminados exitosamente.");
+      } catch (error) {
+        console.error("Error al eliminar el ejemplo:", error);
+      }
+    } else {
+      console.log("Operación de eliminación cancelada.");
     }
   };
 
