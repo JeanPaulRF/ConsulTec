@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../context/authContext"
 import { useNavigate } from "react-router-dom"
-
 import RegisterView from "../views/RegisterView";
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { db } from '../firebaseConfig'
 
 
 function RegisterContainer() {
@@ -33,7 +34,11 @@ function RegisterContainer() {
     }
     else {
       try {
-        await signup(user.email, user.password)
+        const res = await signup(user.email, user.password)
+        await setDoc(doc(db, "users", res.user.uid), {
+          ...user,
+        })
+        alert("Cuenta creada");
         navigate('/login')
       } catch (error) {
         setError(error.message);

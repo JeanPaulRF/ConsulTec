@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useAuth } from "../../context/authContext";
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { db } from '../../firebaseConfig'
 
-function UsuarioForm( { onSubmit } ) {
+function UsuarioForm({ onSubmit }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState()
 
@@ -15,7 +17,7 @@ function UsuarioForm( { onSubmit } ) {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  
+
   const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.ac\.cr)$/;
 
   const correoValido = formatoValido.test(email);
@@ -36,8 +38,13 @@ function UsuarioForm( { onSubmit } ) {
 
     try {
       // Guarda los datos en Firebase
-      
-      await signup(email, password)
+
+      const res = await signup(email, password)
+      await setDoc(doc(db, "users", res.user.uid), {
+        email: email,
+        password: password,
+      })
+
       alert("Usuario agregado");
     } catch (error) {
       setError(error.message);

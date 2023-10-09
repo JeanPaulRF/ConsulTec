@@ -11,7 +11,7 @@ function DynamicDisplayList({ selectedOption, refreshList }) {
     
     return (
         <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-1/4">
-            <div className='flex flex-col p-6 ml-4'>
+            <div className='flex flex-col p-6 ml-1'>
                 {selectedOption === 'curso' ? <CursoList refreshList={refreshList} /> : null}
                 {selectedOption === 'tema' ? <TemaList refreshList={refreshList}/> : null}
                 {selectedOption === 'subtema' ? <SubtemaList refreshList={refreshList}/> : null}
