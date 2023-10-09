@@ -58,9 +58,14 @@ function UsuarioForm({ onSubmit }) {
   };
 
   const onCancel = (e) => {
+    // Llama a la función onSubmit para ejecutarla en ButtonAdd
+    if (onSubmit) {
+        onSubmit(e);
+    }
+    // Limpia el formulario o realiza otras acciones según tus necesidades
     setEmail('');
     setPassword('');
-  };
+};
 
   return (
     <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-1/2">

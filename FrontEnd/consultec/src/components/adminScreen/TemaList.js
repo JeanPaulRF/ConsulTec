@@ -54,7 +54,7 @@ const TemaList = ({ refreshList }) => {
           {temas.map((tema) => (
             <li className='my-2 p-2 flex justify-between items-center' key={tema.id}>
               <div>{tema.nombre}</div>
-              <div className="flex gap-2">
+              <div className="p-2 flex gap-2">
                 <button onClick={() => handleEditTema(tema.id)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
                   Editar
                 </button>
