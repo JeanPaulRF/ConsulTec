@@ -54,9 +54,25 @@ const UserList = ({ refreshList, refreshDynamicDisplayList }) => {
     }
   };
 
+  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.ac\.cr)$/;
+
+  
+
   // Función para manejar la edición de usuario
   const handleSubmitEdicion = async (e) => {
     e.preventDefault();
+
+    const correoValido = formatoValido.test(editedUser.email);
+
+    if (editedUser.email === '') {
+      alert('No puede haber campos vacíos');
+      return;
+    }
+
+    if (!correoValido) {
+      alert("Por favor utiliza un correo @estudiantec.cr para estudiantes o @itcr.ac.cr para profesores");
+      return;
+    }
 
     try {
       // Realiza la actualización de los datos del usuario en Firestore
@@ -95,7 +111,7 @@ const UserList = ({ refreshList, refreshDynamicDisplayList }) => {
               {editedUser && (
                 <form onSubmit={handleSubmitEdicion}>
                   <div style={{ display: 'block' }}>
-                    <label>Correo electrónico:</label>
+                    <label>Correo: </label>
                     <input
                       type="text"
                       value={editedUser.email}
@@ -105,7 +121,7 @@ const UserList = ({ refreshList, refreshDynamicDisplayList }) => {
                     />
                   </div>
                   <div style={{ display: 'block' }}>
-                    <label>Contraseña:</label>
+                    <label>Contraseña: </label>
                     <input
                       type="text"
                       value={editedUser.password}
