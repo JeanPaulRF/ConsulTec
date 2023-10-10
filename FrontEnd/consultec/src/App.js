@@ -7,6 +7,7 @@ import HomeContainer from './containers/HomeContainer';
 import RegisterContainer from './containers/RegisterContainer';
 import PasswordContainer from './containers/PasswordContainer';
 import AdminDashContainer from './containers/AdminDashContainer';
+import MaterialContainer from './containers/MaterialContainer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<HomeContainer />} />
           <Route path='/password' element={<PasswordContainer/>}/>
           <Route path='/admin' element={<AdminDashContainer/>}/>
+          <Route path='/material' element={<MaterialContainer/>}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
