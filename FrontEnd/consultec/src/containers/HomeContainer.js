@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 function HomeContainer  ()  {
     const navigate = useNavigate();
 
-    const handleMaterial = () => {
-      navigate('/login');
+    const handleMaterial = (selectedCourse) => {
+      const course = selectedCourse;
+      navigate(`/material?course=${course}`);
     }
 
     const handleChangePassword = () => {
