@@ -60,7 +60,7 @@ const ConsultaList = ({ refreshList, refreshDynamicDisplayList }) => {
       // Realiza la actualización de los datos de la consulta en Firestore
       const consultaDocRef = doc(db, "consulta", editedConsulta.id);
       await updateDoc(consultaDocRef, {
-        consulta: editedConsulta.consulta, // Actualiza el correo electrónico u otros campos según sea necesario
+        consulta: editedConsulta.consulta, // Actualiza el titulo u otros campos según sea necesario
         titulo: editedConsulta.titulo,
       });
 
@@ -84,7 +84,7 @@ const ConsultaList = ({ refreshList, refreshDynamicDisplayList }) => {
 
   return (
 
-    //Formulario de edicion de usuario
+    //Formulario de edicion de consulta
     <div>
       {editMode ? (
         <div className="rounded-xl mx-10 my-10 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-100">
