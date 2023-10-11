@@ -53,7 +53,7 @@ function QuestionView({ handleChangePassword, handleLogout, subTheme}) {
           )}
         </div>
       </header>
-      <div>
+      <div className='h-full w-full'>
         <QuestionForm
         subTheme={subTheme}
         />

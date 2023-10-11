@@ -110,7 +110,7 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
           )}
         </div>
       </header>
-      <div className={'flex'}>
+      <div className='flex h-full w-full'>
         <div className="w-1/3">
           <TemaList
             temas={temas}

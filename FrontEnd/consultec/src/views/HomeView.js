@@ -58,25 +58,25 @@ function HomeView({ onClickMaterial, handleChangePassword, handleLogout }) {
             <div className="flex flex-wrap flex-row h-screen w-full  justify-center bg-cover bg-no-repeat">
                 <div className="rounded-xl bg-gray-800 bg-opacity-50 px-12 py-10 shadow-lg backdrop-blur-md max-sm:px-8 mt-[40px] ">
                     <div className="flex flex-wrap">
-                        <div onClick={() => onClickCourse('curso/D39VsyyURSJGNhEoKpEa')} className="mx-2">
+                        <div onClick={() => onClickCourse('curso/LtPDRqquXmolBalQNt08')} className="mx-2">
                             <img src={mateGe} alt="Matemática General" style={{ width: '200px', height: '150px' }} />
                             <button >
                                 Matemática general
                             </button>
                         </div>
-                        <div onClick={() => onClickCourse('curso/D39VsyyURSJGNhEoKpEa')} className="mx-2 ">
+                        <div onClick={() => onClickCourse('curso/LtPDRqquXmolBalQNt08')} className="mx-2 ">
                             <img src={calculo} alt="Calculo" style={{ width: '200px', height: '150px' }} />
                             <button >
                                 Cálculo Diferencial e Integral
                             </button>
                         </div>
-                        <div onClick={() => onClickCourse('curso/D39VsyyURSJGNhEoKpEa')} className="mx-2">
+                        <div onClick={() => onClickCourse('curso/LtPDRqquXmolBalQNt08')} className="mx-2">
                             <img src={algebra} alt="Algebra" style={{ width: '200px', height: '150px' }} />
                             <button >
                                 Álgebra Lineal
                             </button>
                         </div>
-                        <div onClick={() => onClickCourse('curso/D39VsyyURSJGNhEoKpEa')} className="mx-2">
+                        <div onClick={() => onClickCourse('curso/LtPDRqquXmolBalQNt08')} className="mx-2">
                             <img src={estadistica} alt="Estadística" style={{ width: '200px', height: '150px' }} />
                             <button >
                                 Estadística
