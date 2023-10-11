@@ -1,6 +1,7 @@
 import React, { useState }from "react";
+import Tabla from "../components/Teachers/Tabla";
 
-function TeachersView (){
+function TeachersView ({datos, onEstadoChange }){
     const [showMenu, setShowMenu] = useState(false);
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -29,7 +30,12 @@ function TeachersView (){
                
             </div>
         </header>
-        
+        <div className="container d-flex justify-content-center align-items-center">
+        <div>
+          <Tabla data={datos}
+          onEstadoChange = {onEstadoChange} />
+        </div>
+      </div>
         </div>
     )
 
