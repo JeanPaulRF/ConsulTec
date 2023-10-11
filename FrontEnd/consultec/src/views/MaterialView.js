@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { app } from '../firebaseConfig';
-import { getFirestore, collection, query, getDocs, where, doc} from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, where, doc } from "firebase/firestore";
 import TemaList from '../components/material/TemaList';
 import SubTemaList from '../components/material/SubTemaList';
 import { useNavigate } from 'react-router-dom';
@@ -24,12 +24,12 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
   }
 
   const handleShowResume = async (selectedSubTheme) => {
-    console.log('buscando '+ selectedSubTheme);
+    console.log('buscando ' + selectedSubTheme);
     const subThemeRef = doc(db, 'subtema', selectedSubTheme);
     const q = query(
-      collection(db, "resumen"), 
+      collection(db, "resumen"),
       where("subtemaRef", "==", subThemeRef)
-      );
+    );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       console.log(doc.data());
@@ -40,9 +40,9 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
     console.log('buscando ' + selectedSubTheme);
     const subThemeRef = doc(db, 'subtema', selectedSubTheme);
     const q = query(
-      collection(db, "ejemplo"), 
+      collection(db, "ejemplo"),
       where("subtemaRef", "==", subThemeRef)
-      );
+    );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       window.open(doc.data().pdfURL);
@@ -52,10 +52,10 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
     navigate(`/question?subtheme=${selectedSubTheme}`);
   }
   useEffect(() => {
-    if(selectedTheme !== ''){
+    if (selectedTheme !== '') {
       const themeRef = doc(db, 'tema', selectedTheme);
       const q = query(
-        collection(db, "subtema"), 
+        collection(db, "subtema"),
         where("temaRef", "==", themeRef));
       const getSubtemas = async () => {
         const querySnapshot = await getDocs(q);
@@ -110,29 +110,40 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
           )}
         </div>
       </header>
-      <h1 style={{ fontSize: '1.6rem', textAlign: 'center' }}>Seleccione un tema</h1>
-      <TemaList
-        temas={temas}
-        onSelectTheme={onSelectTheme}
-      />
-      <SubTemaList
-        subtemas={subtemas}
-        onSelectSubTheme={onSelectSubTheme}
-      />
-      <div>
-        {selectedSubTheme !== '' &&
-          <div className="flex gap-2">
-            <button onClick={() => handleShowResume(selectedSubTheme)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
-              Resumen
-            </button>
-            <button onClick={() => handleShowExample(selectedSubTheme)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
-              Ejemplo
-            </button>
-            <button onClick={() => handleShowQuestions(selectedSubTheme)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
-              Preguntas
-            </button>
-          </div>
-        }
+      <div className={'flex'}>
+        <div className="w-1/3">
+          <TemaList
+            temas={temas}
+            onSelectTheme={onSelectTheme}
+          />
+        </div>
+        <div className="w-1/3">
+          <SubTemaList
+            subtemas={subtemas}
+            onSelectSubTheme={onSelectSubTheme}
+          />
+        </div>
+        <div className="w-1/3">
+          {selectedSubTheme !== '' &&
+            <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font flex items-center justify-center space-x-4">
+              <button 
+              onClick={() => handleShowResume(selectedSubTheme)} 
+              className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
+                Resumen
+              </button>
+              <button 
+              onClick={() => handleShowExample(selectedSubTheme)} 
+              className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
+                Ejemplo
+              </button>
+              <button 
+              onClick={() => handleShowQuestions(selectedSubTheme)} 
+              className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
+                Preguntas
+              </button>
+            </div>
+          }
+        </div>
       </div>
     </div>
   )
