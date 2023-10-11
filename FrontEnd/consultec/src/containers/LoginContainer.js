@@ -30,7 +30,7 @@ function LoginContainer() {
                 if (userEmail.endsWith("@itcr.ac.cr")) {
                     navigate("/teacher");
                   } */
-                if(userCredential.user.email === "paola.alguera@estudiantec.cr"){
+                else if(userCredential.user.email === "paola.alguera@estudiantec.cr"){
                     navigate("/teacher");
                 }
                 else{
