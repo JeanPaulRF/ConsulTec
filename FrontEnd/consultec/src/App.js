@@ -8,6 +8,8 @@ import RegisterContainer from './containers/RegisterContainer';
 import PasswordContainer from './containers/PasswordContainer';
 import AdminDashContainer from './containers/AdminDashContainer';
 import TeachersContainer from './containers/TeachersContainer';
+import MaterialContainer from './containers/MaterialContainer';
+import QuestionContainer from './containers/QuestionContainer';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path='/password' element={<PasswordContainer/>}/>
           <Route path='/admin' element={<AdminDashContainer/>}/>
           <Route path='/teacher' element={<TeachersContainer/>}/>
+          <Route path='/material' element={<MaterialContainer/>}/>
+          <Route path='/question' element={<QuestionContainer/>}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

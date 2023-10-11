@@ -70,7 +70,7 @@ function CursoForm({ onSubmit }) {
           </button>
         </form>
       </div>
-    </div >
+    </div>
   );
 }
 
