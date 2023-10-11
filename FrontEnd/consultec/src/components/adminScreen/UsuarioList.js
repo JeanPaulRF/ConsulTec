@@ -10,9 +10,7 @@ const UserList = ({ refreshList, refreshDynamicDisplayList }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedUser, setEditedUser] = useState();
 
-
-
-
+  // Lectura del doc de usuarios en firebase para despliegue en admin
   useEffect(() => {
     const fetchData = async () => {
 
@@ -54,9 +52,7 @@ const UserList = ({ refreshList, refreshDynamicDisplayList }) => {
     }
   };
 
-  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.ac\.cr)$/;
-
-  
+  const formatoValido = /^[a-zA-Z0-9._%+-]+@(estudiantec\.cr|itcr\.ac\.cr)$/;  
 
   // Función para manejar la edición de usuario
   const handleSubmitEdicion = async (e) => {

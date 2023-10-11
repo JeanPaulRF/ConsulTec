@@ -46,7 +46,7 @@ const CursoList = ({ refreshList }) => {
     e.preventDefault();
 
     if (editedCurso.nombre === '') {
-      alert("Elnombre del curso no puede estar vacío");
+      alert("El nombre del curso no puede estar vacío");
       return;
     }
 
