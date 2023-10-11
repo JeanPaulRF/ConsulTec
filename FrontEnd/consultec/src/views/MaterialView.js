@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { app } from '../firebaseConfig';
-import { getFirestore, collection, query, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, where, doc} from "firebase/firestore";
+import TemaList from '../components/material/TemaList';
+import SubTemaList from '../components/material/SubTemaList';
+import { useNavigate } from 'react-router-dom';
 
 function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedTheme, setSelectTheme] = useState('');
   const [selectedSubTheme, setSelectSubTheme] = useState('');
   const [subtemas, setSubtemas] = useState([]);
+  const navigate = useNavigate();
 
   const db = getFirestore(app);
   const toggleMenu = () => {
@@ -15,31 +19,56 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
   const onSelectTheme = (selectedTheme) => {
     setSelectTheme(selectedTheme);
   }
-  const onSelectSubTheme = (selectedTheme) => {
-    setSelectSubTheme(selectedTheme);
+  const onSelectSubTheme = (selectedSubTheme) => {
+    setSelectSubTheme(selectedSubTheme);
   }
-  const handleShowResume = (selectedTheme) => {
-    setSelectSubTheme(selectedTheme);
+
+  const handleShowResume = async (selectedSubTheme) => {
+    console.log('buscando '+ selectedSubTheme);
+    const subThemeRef = doc(db, 'subtema', selectedSubTheme);
+    const q = query(
+      collection(db, "resumen"), 
+      where("subtemaRef", "==", subThemeRef)
+      );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+      window.open(doc.data().pdfURL);
+    });
   }
-  const handleShowExample = (selectedTheme) => {
-    setSelectSubTheme(selectedTheme);
+  const handleShowExample = async (selectedSubTheme) => {
+    console.log('buscando ' + selectedSubTheme);
+    const subThemeRef = doc(db, 'subtema', selectedSubTheme);
+    const q = query(
+      collection(db, "ejemplo"), 
+      where("subtemaRef", "==", subThemeRef)
+      );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      window.open(doc.data().pdfURL);
+    });
   }
-  const handleShowQuestions = (selectedTheme) => {
-    setSelectSubTheme(selectedTheme);
+  const handleShowQuestions = (selectedSubTheme) => {
+    navigate(`/question?subtheme=${selectedSubTheme}`);
   }
   useEffect(() => {
-    const q = query(collection(db, "subtema"));
-    const getSubtemas = async () => {
-      const querySnapshot = await getDocs(q);
-      const subtemasarray = [];
-      querySnapshot.forEach((doc) => {
-        subtemasarray.push({ ...doc.data(), id: doc.id });
-      });
-      setSubtemas(subtemasarray);
-    };
-    getSubtemas();
+    if(selectedTheme !== ''){
+      const themeRef = doc(db, 'tema', selectedTheme);
+      const q = query(
+        collection(db, "subtema"), 
+        where("temaRef", "==", themeRef));
+      const getSubtemas = async () => {
+        const querySnapshot = await getDocs(q);
+        const subtemasarray = [];
+        querySnapshot.forEach((doc) => {
+          subtemasarray.push({ ...doc.data(), id: doc.id });
+        });
+        setSubtemas(subtemasarray);
+      };
+      getSubtemas();
+    }
   }, [db, selectedTheme]);
-  
+
   return (
     <div style={{ backgroundImage: "url('https://th.bing.com/th/id/R.8f11c679e5dac264326985cd4419f975?rik=n%2bnPpJrHK72m9g&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fd%2f9%2f2%2f94254.jpg&ehk=rfeXjwbaITK5Sv1h0%2boMsgAN0shLtxuK5et51esIWJk%3d&risl=&pid=ImgRaw&r=0')" }}>
       <header className="w-full text-gray-700 bg-blue-400 border-t bg-opacity-50 border-gray-100 shadow-sm body-font">
@@ -82,45 +111,16 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
         </div>
       </header>
       <h1 style={{ fontSize: '1.6rem', textAlign: 'center' }}>Seleccione un tema</h1>
-      <div className=''>
-        <div>
-          {temas.length === 0 ? (
-            <p>No hay temas disponibles.</p>
-          ) : (
-            <ul>
-              {temas.map((tema) => (
-                <li
-                  className='my-2 p-2 flex justify-between items-center'
-                  key={tema.id}>
-                  <div onClick={() => onSelectTheme(tema.id)}>
-                    {tema.nombre}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
+      <TemaList
+        temas={temas}
+        onSelectTheme={onSelectTheme}
+      />
+      <SubTemaList
+        subtemas={subtemas}
+        onSelectSubTheme={onSelectSubTheme}
+      />
       <div>
-        {subtemas.length === 0 ? (
-          <p>No hay subtemas disponibles.</p>
-        ) : (
-          <ul>
-            {subtemas.map((subtema) => (
-              <li
-                className='my-2 p-2 flex justify-between items-center'
-                key={subtema.id}>
-                <div
-                  onClick={() => onSelectSubTheme(subtema.id)}>
-                  {subtema.nombre}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div>
-        {selectedSubTheme === '' ??
+        {selectedSubTheme !== '' &&
           <div className="flex gap-2">
             <button onClick={() => handleShowResume(selectedSubTheme)} className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
               Resumen

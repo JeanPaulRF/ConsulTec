@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import MaterialView from '../views/MaterialView';
 import React, { useState, useEffect } from 'react';
 import { app } from '../firebaseConfig';
-import { getFirestore, collection, query, getDocs} from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, where, doc} from "firebase/firestore";
 
 function MaterialContainer  ()  {
     const navigate = useNavigate();
@@ -13,8 +13,13 @@ function MaterialContainer  ()  {
 
     const db = getFirestore(app);
     const [temas, setTemas] = useState([]);
+    
     useEffect(() => {
-      const q = query(collection(db, "tema"));
+      const ref = course.split('/')[1];
+      const cursoRef = doc(db, 'curso', ref);
+      const q = query(
+        collection(db, "tema"), 
+        where('cursoRef', "==", cursoRef));
       const getTemas = async () => {
         const querySnapshot = await getDocs(q);
         const temasarray = [];
@@ -25,7 +30,7 @@ function MaterialContainer  ()  {
         setTemas(temasarray);
       };
       getTemas();
-    }, [db]);
+    }, [db, course]);
 
     const handleChangePassword = () => {
       navigate('/password')
