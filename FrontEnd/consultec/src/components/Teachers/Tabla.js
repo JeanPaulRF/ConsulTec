@@ -1,5 +1,6 @@
 // Tabla.js
 import React,  { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Tabla({ data, onEstadoChange }) {
 
@@ -44,7 +45,9 @@ function Tabla({ data, onEstadoChange }) {
         {data.map((item, index) => (
         <tr key={index} style={item.Estado === 'No resuelto' ? { ...rowStyle, ...noResueltoStyle } : rowStyle}>
         <td style={cellStyle}>{item.Curso}</td>
-        <td style={cellStyle}>{item.Pregunta}</td>
+        <td style={cellStyle}>
+              <Link to={`/question`}>{item.Pregunta}</Link>
+        </td>
         <td style={cellStyle}>
           {item.Estado === 'No resuelto' ? (
             <button onClick={() => onEstadoChange(index, 'Resuelto')}>No resuelto</button>

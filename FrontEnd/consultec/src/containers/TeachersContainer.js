@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TeachersView from "../views/TeachersView";
 
 
+
 function TeachersContainer(){
+
+    const { user } = useContext(); 
 
     const [datos, setDatos] = useState([
         { Curso: 'CDI', Pregunta: 'Cuantas veces puedo derivar este ejercicio', Estado: 'No resuelto', Calificación: '0' },
