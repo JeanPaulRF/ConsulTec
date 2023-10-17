@@ -51,6 +51,8 @@ function ConsultaForm({ onSubmit }) {
                 titulo: titulo,
                 consulta: consulta,
                 subtemaRef: subtemaRef, // Establece la referencia al subtema
+                estado: 'pendiente',
+                fecha: new Date(),
             });
 
             // Llama a la función onSubmit para ejecutarla en ButtonAdd
