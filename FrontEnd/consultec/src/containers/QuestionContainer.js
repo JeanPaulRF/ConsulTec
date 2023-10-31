@@ -10,6 +10,8 @@ function QuestionContainer  ()  {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const subTheme = searchParams.get('subtheme');
+    const title = searchParams.get('title');
+    const course = searchParams.get('course');
 
     // const db = getFirestore(app);
     // const [questions, setQuestions] = useState([]);
@@ -46,6 +48,8 @@ function QuestionContainer  ()  {
         handleChangePassword={handleChangePassword}
         handleLogout={handleLogout}
         subTheme={subTheme}
+        title={title}
+        course={course}
         />
       </div>
     );

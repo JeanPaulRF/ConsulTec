@@ -4,9 +4,8 @@ import QuestionList from '../components/questionScreen/QuestionList';
 import { auth } from '../firebaseConfig';
 import { onAuthStateChanged } from "firebase/auth";
 
-function QuestionView({ handleChangePassword, handleLogout, subTheme }) {
+function QuestionView({ handleChangePassword, handleLogout, subTheme, course, title }) {
   const [showMenu, setShowMenu] = useState(false);
-
   const [user, setUser] = useState("");
   const [hasFetchedUser, setHasFetchedUser] = useState(false);
 
@@ -78,6 +77,8 @@ function QuestionView({ handleChangePassword, handleLogout, subTheme }) {
           <QuestionForm
             subTheme={subTheme}
             user={user}
+            course={course}
+            courseTitle={title}
           />
         </div>
         <div className='w-2/3 mt-16'>

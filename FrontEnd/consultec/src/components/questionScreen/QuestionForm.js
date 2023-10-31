@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../../firebaseConfig';
 import { collection, addDoc, doc } from 'firebase/firestore';
 
-function QuestionForm({ subTheme }) {
+function QuestionForm({ subTheme, course, user, courseTitle }) {
   const [titulo, setTitulo] = useState('');
   const [consulta, setConsulta] = useState('');
   const [selectedSubtema, setSelectedSubtema] = useState(subTheme);
@@ -26,12 +26,24 @@ function QuestionForm({ subTheme }) {
     try {
       // Obtener la referencia del subtema seleccionado por su ID
       const subtemaRef = doc(db, 'subtema', selectedSubtema);
-
+      console.log({
+        titulo: titulo,
+        consulta: consulta,
+        subtemaRef: subtemaRef, 
+        user: user,
+        cursoRef: course,
+        isResolved: false,
+        titleSubject: courseTitle
+      })
       // Guardar los datos en Firestore, incluida la URL del PDF
       await addDoc(collection(db, 'consulta'), {
         titulo: titulo,
         consulta: consulta,
-        subtemaRef: subtemaRef, // Establece la referencia al subtema
+        subtemaRef: subtemaRef, 
+        user: user,
+        cursoRef: course,
+        isResolved: false,
+        titleSubject: courseTitle
       });
       // Limpia el formulario o realiza otras acciones según tus necesidades
       setTitulo('');
