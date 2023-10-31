@@ -1,6 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
-
+import { useState,  useEffect} from 'react'
+import { db } from '../../firebaseConfig';
+import { setDoc, doc, collection, query, getDocs, getDoc } from 'firebase/firestore';
 export default function QuestionItem(
   { consulta, IdQuestion, titulo, isResolve,
     isLinked, isResolvePDF, linkRef, resolve,
@@ -9,13 +10,24 @@ export default function QuestionItem(
 ) {
 
   const [showButtons, setShowButtons] = useState(isResolve);
+  const [resolveContentPromise, setResolveContentPromise] = useState(null);
 
-  const handleVote = (like) => {
+  useEffect(() => {
+    setResolveContentPromise(resolveContent());
+  }, []);
+
+  const handleVote = async (like) => {
     setShowButtons(false);
-    if (like) {
-    } else {
-    }
-    console.log(like)
+    var votes = 0;
+    const quenstionRef = doc(db, 'consulta', IdQuestion);
+    const querySnapshot = await getDocs(quenstionRef);
+    querySnapshot.forEach((doc) => {
+      votes = doc.data().votes;
+    });
+    const newVotes = like ? votes++ : votes--;
+    await setDoc(quenstionRef, {
+      votes: newVotes
+    });
     alert("Hemos recibido tu retroalimentación, gracias");
   }
 
@@ -24,26 +36,33 @@ export default function QuestionItem(
   }
 
   const resolveContent = () => {
-    if (isLinked) {
-      //get linked question
-      const linkedQuestion = "";
-      return (
-        <QuestionItem
-          consulta={linkedQuestion.consulta}
-          IdQuestion={linkedQuestion.IdQuestion}
-          titulo={linkedQuestion.titulo}
-          isResolve={linkedQuestion.isResolve}
-          isLinked={false} //dont acept recursive calls 
-          isResolvePDF={linkedQuestion.isResolvePDF}
-          linkRef={linkedQuestion.isLinked ? linkedQuestion.linkRef : null}
-          resolve={!linkedQuestion.isLinked ? linkedQuestion.resolve : null}
-          user={user}
-        />
-      );
-    } else if (isResolvePDF) {
+    // if (isLinked) {
+    //   var linkedQuestion = {};
+    //   const quenstionRef = doc(db, 'consulta', linkRef);
+    //   const docSnap = await getDoc(quenstionRef);
+    //   if (docSnap.exists()) {
+    //     linkedQuestion = docSnap.data();
+    //   } else {
+    //     console.log("No such document!");
+    //   }
+    //   return (
+    //     <QuestionItem
+    //       consulta={linkedQuestion.consulta}
+    //       IdQuestion={linkedQuestion.IdQuestion}
+    //       titulo={linkedQuestion.titulo}
+    //       isResolve={linkedQuestion.isResolve}
+    //       isLinked={false} //dont acept recursive calls 
+    //       isResolvePDF={linkedQuestion.isResolvePDF}
+    //       linkRef={linkedQuestion.isLinked ? linkedQuestion.linkRef : null}
+    //       resolve={!linkedQuestion.isLinked ? linkedQuestion.resolve : null}
+    //       user={user}
+    //     />
+    //   );
+    // } else 
+    if (isResolvePDF) {
       return (
         <div className='items-center justify-center h-full v-full space-y-0.5'>
-        <p>Respuesta:</p>
+          <p>Respuesta:</p>
           <button
             onClick={handleShowPDF}
             className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70"
@@ -51,14 +70,13 @@ export default function QuestionItem(
             Mostrar solución
           </button>
         </div>
-
       );
     } else {
       return (
         <div>
           <p>Respuesta:</p>
           <div className='rounded-xl m-1 p-4 bg-gray-600'>
-          <p>{resolve}</p>
+            <p>{resolve}</p>
           </div>
         </div>
       );
@@ -76,7 +94,7 @@ export default function QuestionItem(
       </div>
       {isResolve && (
         <div div className='rounded-xl m-2 p-4 bg-gray-500 text-justify items-center justify-center'>
-          {resolveContent()}
+          {resolveContentPromise}
         </div>
       )}
       {showButtons && (
