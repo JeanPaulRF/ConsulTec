@@ -31,7 +31,7 @@ function QuestionContainer  ()  {
         setQuestions(questionsArray);
       };
       getTemas();
-    }, [questions, subTheme]);
+    }, [ subTheme]);
 
     const handleChangePassword = () => {
       navigate('/password')
