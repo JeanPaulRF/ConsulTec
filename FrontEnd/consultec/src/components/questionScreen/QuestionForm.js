@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { db } from '../../firebaseConfig';
 import { collection, addDoc, doc } from 'firebase/firestore';
 
-function QuestionForm({ subTheme }) {
+function QuestionForm({ subTheme, course, user, courseTitle }) {
   const [titulo, setTitulo] = useState('');
   const [consulta, setConsulta] = useState('');
   const [selectedSubtema, setSelectedSubtema] = useState(subTheme);
@@ -26,12 +26,28 @@ function QuestionForm({ subTheme }) {
     try {
       // Obtener la referencia del subtema seleccionado por su ID
       const subtemaRef = doc(db, 'subtema', selectedSubtema);
-
+      console.log({
+        titulo: titulo,
+        consulta: consulta,
+        subtemaRef: subtemaRef, 
+        user: user,
+        cursoRef: course,
+        isResolved: false,
+        titleSubject: courseTitle
+      })
       // Guardar los datos en Firestore, incluida la URL del PDF
       await addDoc(collection(db, 'consulta'), {
         titulo: titulo,
         consulta: consulta,
-        subtemaRef: subtemaRef, // Establece la referencia al subtema
+        subtemaRef: subtemaRef, 
+        user: user,
+        cursoRef: course,
+        isResolved: false,
+        titleSubject: courseTitle,
+        isLinked: false,
+        isResolvePDF:false,
+        linkRef:subtemaRef,
+        resolve:""
       });
       // Limpia el formulario o realiza otras acciones según tus necesidades
       setTitulo('');
@@ -50,7 +66,7 @@ function QuestionForm({ subTheme }) {
   };
 
   return (
-    <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font w-1/4 ">
+    <div className="rounded-xl mx-16 my-16 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font">
       <div className="flex flex-col p-6 items-center justify-center">
         <form>
           <div className='flex items-center justify-center my-2'>

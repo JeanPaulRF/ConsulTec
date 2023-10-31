@@ -5,7 +5,7 @@ import TemaList from '../components/material/TemaList';
 import SubTemaList from '../components/material/SubTemaList';
 import { useNavigate } from 'react-router-dom';
 
-function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
+function MaterialView({ handleChangePassword, handleLogout, course, temas, title }) {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedTheme, setSelectTheme] = useState('');
   const [selectedSubTheme, setSelectSubTheme] = useState('');
@@ -49,7 +49,7 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
     });
   }
   const handleShowQuestions = (selectedSubTheme) => {
-    navigate(`/question?subtheme=${selectedSubTheme}`);
+    navigate(`/question?subtheme=${selectedSubTheme}&title=${title}&course=${course}`);
   }
   useEffect(() => {
     if (selectedTheme !== '') {
@@ -137,7 +137,7 @@ function MaterialView({ handleChangePassword, handleLogout, course, temas }) {
                 Ejemplo
               </button>
               <button 
-              onClick={() => handleShowQuestions(selectedSubTheme)} 
+              onClick={() => handleShowQuestions(selectedSubTheme, course, title)} 
               className="bg-blue-500 bg-opacity-70 text-white px-2 py-1 rounded-3xl hover:bg-blue-700 hover:bg-opacity-70">
                 Preguntas
               </button>
