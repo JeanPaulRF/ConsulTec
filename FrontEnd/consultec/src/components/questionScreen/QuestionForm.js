@@ -43,7 +43,11 @@ function QuestionForm({ subTheme, course, user, courseTitle }) {
         user: user,
         cursoRef: course,
         isResolved: false,
-        titleSubject: courseTitle
+        titleSubject: courseTitle,
+        isLinked: false,
+        isResolvePDF:false,
+        linkRef:subtemaRef,
+        resolve:""
       });
       // Limpia el formulario o realiza otras acciones según tus necesidades
       setTitulo('');

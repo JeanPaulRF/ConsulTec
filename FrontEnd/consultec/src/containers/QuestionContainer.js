@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { app } from '../firebaseConfig';
-import { getFirestore, collection, query, getDocs, where, doc} from "firebase/firestore";
+import { collection, query, getDocs, where, doc} from "firebase/firestore";
 import QuestionView from '../views/QuestionView';
+import { db } from '../firebaseConfig';
 
 function QuestionContainer  ()  {
     const navigate = useNavigate();
@@ -13,25 +13,25 @@ function QuestionContainer  ()  {
     const title = searchParams.get('title');
     const course = searchParams.get('course');
 
-    // const db = getFirestore(app);
-    // const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState([]);
     
-    // useEffect(() => {
-    //   const cursoRef = doc(db, 'consulta', subTheme);
-    //   const q = query(
-    //     collection(db, "consulta"), 
-    //     where('cursoRef', "==", cursoRef));
-    //   const getTemas = async () => {
-    //     const querySnapshot = await getDocs(q);
-    //     const questionsArray = [];
-    //     querySnapshot.forEach((doc) => {
-    //       questionsArray.push({ ...doc.data(), id: doc.id });
-    //     });
-  
-    //     setQuestions(questionsArray);
-    //   };
-    //   getTemas();
-    // }, [db, subTheme, questions]);
+    useEffect(() => {
+      const subtemaRef = doc(db, 'subtema', subTheme);
+      console.log(subtemaRef);
+      const q = query(
+        collection(db, "consulta"), 
+        where('subtemaRef', "==", subtemaRef));
+      const getTemas = async () => {
+        const querySnapshot = await getDocs(q);
+        var questionsArray = [];
+        querySnapshot.forEach((doc) => {
+          questionsArray.push({ ...doc.data(), id: doc.id });
+        });
+        console.log(questionsArray);
+        setQuestions(questionsArray);
+      };
+      getTemas();
+    }, [questions, subTheme]);
 
     const handleChangePassword = () => {
       navigate('/password')
@@ -44,7 +44,7 @@ function QuestionContainer  ()  {
     return (
       <div>
         <QuestionView
-        // questions={questions}
+        questions={questions}
         handleChangePassword={handleChangePassword}
         handleLogout={handleLogout}
         subTheme={subTheme}

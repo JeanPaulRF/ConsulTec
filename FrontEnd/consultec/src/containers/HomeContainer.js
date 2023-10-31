@@ -17,7 +17,6 @@ function HomeContainer  ()  {
         querySnapshot.forEach((doc) => {
           temasarray.push({ ...doc.data(), id: doc.id });
         });
-  
         setCourses(temasarray);
       };
       getTemas();
