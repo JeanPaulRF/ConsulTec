@@ -1,11 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import TeachersView from "../views/TeachersView";
+import { app } from '../firebaseConfig';
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
 
 
 
 function TeachersContainer(){
 
-   
+  const [refreshList, setRefreshList] = useState(false);
+  const db = getFirestore(app);
+  const [consultas, setConsultas] = useState([]);
+  const refreshDynamicDisplayList = () => {
+    setRefreshList(!refreshList);
+  };
 
     const [datos, setDatos] = useState([
         { Curso: 'Álgebra Lineal', Pregunta: '¿Cuál es la matriz identidad?', Estado: 'No resuelto', Calificación: '0' },
@@ -23,10 +30,28 @@ function TeachersContainer(){
        
       ]);
 
+      useEffect(() => {
+        const q = query(collection(db, "consulta"));
+        const getConsultas = async () => {
+          const querySnapshot = await getDocs(q);
+          const consultasarray = [];
+          querySnapshot.forEach((doc) => {
+            consultasarray.push({ ...doc.data(), id: doc.id });
+          });
+    
+          setConsultas(consultasarray);
+          console.log(consultas);
+        };
+        getConsultas();
+      }, [db, refreshList]);
+
+
+
       const handleEstadoChange = (index, nuevoEstado) => {
         const nuevosDatos = [...datos];
         nuevosDatos[index].Estado = nuevoEstado;
         setDatos(nuevosDatos);
+        
       };
 
     return(
