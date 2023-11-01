@@ -30,7 +30,10 @@ function Tabla({ data, onEstadoChange }) {
       const noResueltoStyle = {
         backgroundColor: 'pink', // Cambia esto a tu estilo deseado
       };
+   
 
+  
+     
   return (
    <table style={tableStyle}>
       <thead>
@@ -43,19 +46,19 @@ function Tabla({ data, onEstadoChange }) {
       </thead>
       <tbody>
         {data.map((item, index) => (
-        <tr key={index} style={item.Estado === 'No resuelto' ? { ...rowStyle, ...noResueltoStyle } : rowStyle}>
-        <td style={cellStyle}>{item.Curso}</td>
+        <tr key={index} style={item.isResolved === false ? { ...rowStyle, ...noResueltoStyle } : rowStyle}>
+        <td style={cellStyle}>{item.titleSubject}</td>
         <td style={cellStyle}>
-              <Link to={`/question`}>{item.Pregunta}</Link>
+              <Link to={`/question`}>{item.consulta}</Link>
         </td>
         <td style={cellStyle}>
-          {item.Estado === 'No resuelto' ? (
-            <button onClick={() => onEstadoChange(index, 'Resuelto')}>No resuelto</button>
+          {item.isResolved === false ? (
+            <button onClick={() => onEstadoChange(index, true)}>No resuelto</button>
           ) : (
-            <button onClick={() => onEstadoChange(index, 'No resuelto')}>Resuelto</button>
+            <button onClick={() => onEstadoChange(index, false)}>Resuelto</button>
           )}
         </td>
-        <td style={cellStyle}>{item.Calificación}</td>
+        <td style={cellStyle}>{item.titulo}</td>
           </tr>
         ))}
       </tbody>

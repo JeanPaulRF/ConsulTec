@@ -8,13 +8,12 @@ import { getFirestore, collection, query, where, getDocs } from 'firebase/firest
 function TeachersContainer(){
 
   const [refreshList, setRefreshList] = useState(false);
-  const db = getFirestore(app);
-  const [consultas, setConsultas] = useState([]);
+
   const refreshDynamicDisplayList = () => {
     setRefreshList(!refreshList);
   };
 
-    const [datos, setDatos] = useState([
+  /*  
         { Curso: 'Álgebra Lineal', Pregunta: '¿Cuál es la matriz identidad?', Estado: 'No resuelto', Calificación: '0' },
   { Curso: 'Cálculo Diferencial', Pregunta: '¿Cómo se calcula la derivada de una función?', Estado: 'Resuelto', Calificación: '10' },
   { Curso: 'Álgebra Lineal', Pregunta: 'Describa la ecuación de una línea en el plano', Estado: 'No resuelto', Calificación: '0' },
@@ -28,36 +27,67 @@ function TeachersContainer(){
   { Curso: 'Matemáticas General', Pregunta: '¿En qué campos se aplican las matemáticas?', Estado: 'Resuelto', Calificación: '10' }
 
        
-      ]);
+      ]); */
+
+      const [consultas, setConsultas] = useState([]);
+      
+      const [datosExtraidos, setDatosExtraidos] = useState([]);
+      const db = getFirestore(app);
+    
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const q = query(collection(db, "consulta"));
+            const querySnapshot = await getDocs(q);
+            const consultasArray = [];
+    
+            querySnapshot.forEach((doc) => {
+              consultasArray.push({ ...doc.data(), id: doc.id });
+            });
+    
+            setConsultas(consultasArray);
+           
+          } catch (error) {
+            console.error("Error al obtener los datos:", error);
+          }
+        };
+    
+        fetchData();
+      }, [db]);
+
+ 
+
 
       useEffect(() => {
-        const q = query(collection(db, "consulta"));
-        const getConsultas = async () => {
-          const querySnapshot = await getDocs(q);
-          const consultasarray = [];
-          querySnapshot.forEach((doc) => {
-            consultasarray.push({ ...doc.data(), id: doc.id });
+        // Función para extraer y almacenar los datos
+        function extraerDatos() {
+          const datosExtraidos = consultas.map((consulta1) => {
+            const { titleSubject, consulta, isResolved, titulo } = consulta1;
+            return { titleSubject, consulta, isResolved, titulo };
           });
     
-          setConsultas(consultasarray);
-          console.log(consultas);
-        };
-        getConsultas();
-      }, [db, refreshList]);
-
-
+          setDatosExtraidos(datosExtraidos);
+        }
+    
+        // Llamar a la función para extraer y almacenar los datos solo una vez, cuando el componente se monta
+        extraerDatos();
+      }, [consultas]); // Asegúrate de incluir "consultas" en la lista de dependencias
+      
+      
 
       const handleEstadoChange = (index, nuevoEstado) => {
-        const nuevosDatos = [...datos];
-        nuevosDatos[index].Estado = nuevoEstado;
-        setDatos(nuevosDatos);
+        const nuevosDatos = [...consultas];
+        nuevosDatos[index].isResolved = nuevoEstado;
+        setConsultas(nuevosDatos);
+        
         
       };
 
+    
     return(
 
          <TeachersView 
-        datos={datos}
+        datos={datosExtraidos}
         onEstadoChange={handleEstadoChange} />
     )
 
