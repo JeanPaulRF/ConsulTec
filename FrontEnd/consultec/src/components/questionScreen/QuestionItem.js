@@ -11,7 +11,6 @@ export default function QuestionItem(
 
   const [showButtons, setShowButtons] = useState(isResolve);
   const [resolveContentPromise, setResolveContentPromise] = useState(null);
-
   useEffect(() => {
     setResolveContentPromise(resolveContent());
   }, []);
@@ -95,7 +94,7 @@ export default function QuestionItem(
       </div>
       {isResolve && (
         <div div className='rounded-xl m-2 p-4 bg-gray-500 text-justify items-center justify-center'>
-          {resolveContentPromise}
+          {resolveContent()}
         </div>
       )}
       {showButtons && (
