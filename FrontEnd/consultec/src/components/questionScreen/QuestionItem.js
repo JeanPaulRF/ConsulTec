@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,  useEffect} from 'react'
 import { db } from '../../firebaseConfig';
-import { setDoc, doc, collection, query, getDocs, getDoc } from 'firebase/firestore';
+import { setDoc, doc, getDoc, query } from 'firebase/firestore';
 export default function QuestionItem(
   { consulta, IdQuestion, titulo, isResolve,
     isLinked, isResolvePDF, linkRef, resolve,
@@ -18,16 +18,17 @@ export default function QuestionItem(
 
   const handleVote = async (like) => {
     setShowButtons(false);
-    var votes = 0;
+    var question = {}
     const quenstionRef = doc(db, 'consulta', IdQuestion);
-    const querySnapshot = await getDocs(quenstionRef);
-    querySnapshot.forEach((doc) => {
-      votes = doc.data().votes;
-    });
-    const newVotes = like ? votes++ : votes--;
-    await setDoc(quenstionRef, {
-      votes: newVotes
-    });
+    const querySnapshot = await getDoc(quenstionRef);
+    if (querySnapshot.exists()) {
+      question = querySnapshot.data();
+      console.log("Document data:", querySnapshot.data());
+    } 
+    console.log(like)
+    const newVotes = like ? question.votes + 1 : question.votes - 1;
+    question.votes = newVotes;
+    await setDoc(quenstionRef, question);
     alert("Hemos recibido tu retroalimentación, gracias");
   }
 

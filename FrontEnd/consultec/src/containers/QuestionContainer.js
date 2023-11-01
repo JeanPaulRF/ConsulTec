@@ -27,7 +27,14 @@ function QuestionContainer  ()  {
         querySnapshot.forEach((doc) => {
           questionsArray.push({ ...doc.data(), id: doc.id });
         });
-        console.log(questionsArray);
+        questionsArray.sort((a, b) => b.votes - a.votes, {
+          orderBy: [
+            {
+              field: 'votes',
+              direction: 'desc',
+            },
+          ],
+        });
         setQuestions(questionsArray);
       };
       getTemas();

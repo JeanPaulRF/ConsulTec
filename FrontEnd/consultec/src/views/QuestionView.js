@@ -83,7 +83,6 @@ function QuestionView({ handleChangePassword, handleLogout, subTheme, course, ti
         </div>
         <div className='w-2/3 mt-16'>
           <QuestionList
-            user={user}
             questions={questions}
           />
         </div>
