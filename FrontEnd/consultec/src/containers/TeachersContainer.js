@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import TeachersView from "../views/TeachersView";
 import { app } from '../firebaseConfig';
 import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import Tabla from "../components/Teachers/Tabla";
 
 
 
@@ -10,7 +11,7 @@ function TeachersContainer(){
 
       const [consultas, setConsultas] = useState([]);
       
-      const [datosExtraidos, setDatosExtraidos] = useState([]);
+  
       const db = getFirestore(app);
     
       useEffect(() => {
@@ -19,12 +20,14 @@ function TeachersContainer(){
             const q = query(collection(db, "consulta"));
             const querySnapshot = await getDocs(q);
             const consultasArray = [];
+          
     
             querySnapshot.forEach((doc) => {
               consultasArray.push({ ...doc.data(), id: doc.id });
             });
     
             setConsultas(consultasArray);
+           
            
           } catch (error) {
             console.error("Error al obtener los datos:", error);
@@ -34,7 +37,7 @@ function TeachersContainer(){
         fetchData();
       }, [db]);
 
- 
+     
 
 /* 
       useEffect(() => {
@@ -58,14 +61,16 @@ function TeachersContainer(){
         const nuevosDatos = [...consultas];
         nuevosDatos[index].isResolved = nuevoEstado;
         setConsultas(nuevosDatos);
-        
+      
+   
         
       };
+      console.log("Containers teacher");
+      console.log(consultas);
 
-    
     return(
 
-         <TeachersView 
+         <TeachersView
         datos={consultas}
         onEstadoChange={handleEstadoChange} />
     )

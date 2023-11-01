@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import { app } from '../../firebaseConfig';
+import { getFirestore, collection, query, doc, updateDoc} from 'firebase/firestore';
 
 
-function ModalRes({ consulta, resoluciones, isOpen, onRequestClose }){
+function ModalRes({ consulta, objeto ,resoluciones, isOpen, onRequestClose }){
     const [respuesta, setRespuesta] = useState('');
     const [selectedResolucion, setSelectedResolucion] = useState('');
+    const db = getFirestore(app);
+   
+
 
     const botonEstilo = {
       background: 'linear-gradient(to bottom, #3498db, #2980b9)',
@@ -17,10 +22,28 @@ function ModalRes({ consulta, resoluciones, isOpen, onRequestClose }){
     };
     
     
-    const handleAceptar = () => {
-       console.log(consulta);
-      };
+    const handleAceptar = async () => {
+       if (respuesta.length>0) {
+       
+        try {
+          
+          const docRef = doc(db, 'consulta', objeto ); 
+          await updateDoc(docRef, {
+            isResolved: true,
+            resolve: respuesta
+          });
+    
+          
+          onRequestClose();
+        } catch (error) {
+          
+          console.error("Error al actualizar el documento en Firebase:", error);
+        }
+      } 
 
+    };
+
+     
 
       return (
           <Modal

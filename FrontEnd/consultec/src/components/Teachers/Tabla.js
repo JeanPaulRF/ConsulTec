@@ -1,11 +1,13 @@
-// Tabla.js
 import React,  { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from './ModalRes'
 
 function Tabla({ data, onEstadoChange }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [consultaSeleccionada, setConsultaSeleccionada] =useState(null);
+  const [consultaSeleccionada, setConsultaSeleccionada] =useState("");
+  const [consultaSel, setConsultaSel] =useState("");
+
+ 
     const tableStyle = {
         width: '100%',
         borderCollapse: 'collapse',
@@ -30,21 +32,24 @@ function Tabla({ data, onEstadoChange }) {
       };
 
       const noResueltoStyle = {
-        backgroundColor: 'pink', // Cambia esto a tu estilo deseado
+        backgroundColor: 'pink', 
       };
    
-      console.log(data);
   
-      const openModal = (consulta) => {
+      const openModal = (consulta, item) => {
         setConsultaSeleccionada(consulta);
+        setConsultaSel(item)
         setModalIsOpen(true);
+        
       };
 
 
       const closeModal = () => {
         setModalIsOpen(false);
       };
-     
+
+   
+    
   return (
     <div>
    <table style={tableStyle}>
@@ -61,14 +66,10 @@ function Tabla({ data, onEstadoChange }) {
         <tr key={index} style={item.isResolved === false ? { ...rowStyle, ...noResueltoStyle } : rowStyle}>
         <td style={cellStyle}>{item.titleSubject}</td>
         <td style={cellStyle}>
-        <span onClick={() => openModal(item.consulta)} style={{ cursor: 'pointer' }}>{item.consulta}</span>
+        <span onClick={() => openModal(item.consulta, item.id)} style={{ cursor: 'pointer' }}>{item.consulta}</span>
         </td>
         <td style={cellStyle}>
-          {item.isResolved === false ? (
-            <button onClick={() => onEstadoChange(index, true)}>No resuelto</button>
-          ) : (
-            <button onClick={() => onEstadoChange(index, false)}>Resuelto</button>
-          )}
+          {item.isResolved ? 'Resuelto' : 'No resuelto'}
         </td>
         <td style={cellStyle}>{item.resolve}</td>
           </tr>
@@ -79,6 +80,7 @@ function Tabla({ data, onEstadoChange }) {
             
       <Modal
         consulta={consultaSeleccionada}
+        objeto = {consultaSel}
         resoluciones={['Resolución 1', 'Resolución 2', 'Resolución 3']} // Reemplaza con tus resoluciones reales
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
