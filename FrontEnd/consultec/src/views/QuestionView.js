@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { app } from '../firebaseConfig';
-import { getFirestore, collection, query, getDocs, where, doc} from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
 import QuestionForm from '../components/questionScreen/QuestionForm';
+import QuestionList from '../components/questionScreen/QuestionList';
+import { auth } from '../firebaseConfig';
+import { onAuthStateChanged } from "firebase/auth";
 
-function QuestionView({ handleChangePassword, handleLogout, subTheme}) {
+function QuestionView({ handleChangePassword, handleLogout, subTheme, course, title, questions }) {
   const [showMenu, setShowMenu] = useState(false);
+  const [user, setUser] = useState("");
+  const [hasFetchedUser, setHasFetchedUser] = useState(false);
 
-  const db = getFirestore(app);
+  const handleUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user.email);
+      } else {
+        setUser("anónimo@estudiantec.cr");
+      }
+      setHasFetchedUser(true);
+    });
+  };
+
+  useEffect(() => {
+    if (!hasFetchedUser) {
+      handleUser();
+    }
+  }, [hasFetchedUser]);
+
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -53,10 +72,21 @@ function QuestionView({ handleChangePassword, handleLogout, subTheme}) {
           )}
         </div>
       </header>
-      <div className='h-full w-full'>
-        <QuestionForm
-        subTheme={subTheme}
-        />
+      <div className='flex h-full w-full'>
+        <div className='w-1/4'>
+          <QuestionForm
+            subTheme={subTheme}
+            user={user}
+            course={course}
+            courseTitle={title}
+          />
+        </div>
+        <div className='w-2/3 mt-16'>
+          <QuestionList
+            user={user}
+            questions={questions}
+          />
+        </div>
       </div>
     </div>
   )
@@ -65,5 +95,4 @@ function QuestionView({ handleChangePassword, handleLogout, subTheme}) {
 
 
 }
-
 export default QuestionView;

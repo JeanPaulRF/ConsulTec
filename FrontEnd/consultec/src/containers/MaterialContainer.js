@@ -10,12 +10,13 @@ function MaterialContainer  ()  {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const course = searchParams.get('course');
+    const title = searchParams.get('title');
 
     const db = getFirestore(app);
     const [temas, setTemas] = useState([]);
     
     useEffect(() => {
-      const ref = course.split('/')[1];
+      const ref = course;
       const cursoRef = doc(db, 'curso', ref);
       const q = query(
         collection(db, "tema"), 
@@ -45,6 +46,7 @@ function MaterialContainer  ()  {
         <MaterialView
         course={course}
         temas={temas}
+        title={title}
         handleChangePassword={handleChangePassword}
         handleLogout={handleLogout}
         />
