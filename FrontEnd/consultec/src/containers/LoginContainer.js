@@ -26,13 +26,13 @@ function LoginContainer() {
                 if(userCredential.user.email === "admin@admin.com"){
                     navigate("/admin");
                 }
-             /*    const userEmail = userCredential.user.email;
+                const userEmail = userCredential.user.email;
                 if (userEmail.endsWith("@itcr.ac.cr")) {
                     navigate("/teacher");
-                  } */
-                else if(userCredential.user.email === "paola.alguera@estudiantec.cr"){
+                  } 
+/*                 else if(userCredential.user.email === "paola.alguera@estudiantec.cr"){
                     navigate("/teacher");
-                }
+                } */
                 else{
                     navigate("/home");
                 }

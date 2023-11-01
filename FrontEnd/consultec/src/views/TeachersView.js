@@ -1,11 +1,16 @@
 import React, { useState }from "react";
 import Tabla from "../components/Teachers/Tabla";
+import { useNavigate } from 'react-router-dom';
 
 function TeachersView ({datos, onEstadoChange }){
     const [showMenu, setShowMenu] = useState(false);
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        navigate('/login')
+      }
 
     return (
         <div style={{ backgroundImage: "url('https://th.bing.com/th/id/R.8f11c679e5dac264326985cd4419f975?rik=n%2bnPpJrHK72m9g&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2fd%2f9%2f2%2f94254.jpg&ehk=rfeXjwbaITK5Sv1h0%2boMsgAN0shLtxuK5et51esIWJk%3d&risl=&pid=ImgRaw&r=0')" }}>
@@ -15,7 +20,7 @@ function TeachersView ({datos, onEstadoChange }){
                     ConsulTec
                 </a>
                 <div className="ml-auto relative">
-                    <div onClick={toggleMenu} className="cursor-pointer">
+                    <div onClick={handleLogout} className="cursor-pointer">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="40"

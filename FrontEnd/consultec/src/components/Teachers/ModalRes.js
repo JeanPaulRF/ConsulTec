@@ -38,6 +38,7 @@ function ModalRes({ consulta, objeto ,resoluciones, isOpen, onRequestClose }){
     
            setRespuesta("");
           onRequestClose();
+          window.location.reload();
         } catch (error) {
           
           console.error("Error al actualizar el documento en Firebase:", error);
