@@ -6,6 +6,7 @@ function Tabla({ data, onEstadoChange }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [consultaSeleccionada, setConsultaSeleccionada] =useState("");
   const [consultaSel, setConsultaSel] =useState("");
+  const [consultasResueltas, setConsultasResueltas] = useState([]);
 
  
     const tableStyle = {
@@ -35,19 +36,28 @@ function Tabla({ data, onEstadoChange }) {
         backgroundColor: 'pink', 
       };
    
+      const guardarRespuestasEnConsultasResueltas = () => {
+        const respuestas = data.map((item) => item.resolve);
+        setConsultasResueltas(respuestas);
+      };
   
       const openModal = (consulta, item) => {
+        setConsultasResueltas([]);
         setConsultaSeleccionada(consulta);
         setConsultaSel(item)
+        guardarRespuestasEnConsultasResueltas();
         setModalIsOpen(true);
         
       };
 
 
+  
+
       const closeModal = () => {
         setModalIsOpen(false);
       };
 
+   
    
     
   return (
@@ -81,7 +91,7 @@ function Tabla({ data, onEstadoChange }) {
       <Modal
         consulta={consultaSeleccionada}
         objeto = {consultaSel}
-        resoluciones={['Resolución 1', 'Resolución 2', 'Resolución 3']} // Reemplaza con tus resoluciones reales
+        resoluciones={consultasResueltas} // Reemplaza con tus resoluciones reales
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
       />

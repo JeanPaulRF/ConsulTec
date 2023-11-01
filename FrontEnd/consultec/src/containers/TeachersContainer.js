@@ -65,8 +65,7 @@ function TeachersContainer(){
    
         
       };
-      console.log("Containers teacher");
-      console.log(consultas);
+ 
 
     return(
 

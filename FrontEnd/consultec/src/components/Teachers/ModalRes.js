@@ -8,6 +8,9 @@ function ModalRes({ consulta, objeto ,resoluciones, isOpen, onRequestClose }){
     const [respuesta, setRespuesta] = useState('');
     const [selectedResolucion, setSelectedResolucion] = useState('');
     const db = getFirestore(app);
+    const [selectedOption, setSelectedOption] = useState('');
+    const [textareaValue, setTextareaValue] = useState('');
+  
    
 
 
@@ -23,17 +26,17 @@ function ModalRes({ consulta, objeto ,resoluciones, isOpen, onRequestClose }){
     
     
     const handleAceptar = async () => {
-       if (respuesta.length>0) {
+       if (textareaValue.length>0) {
        
         try {
           
           const docRef = doc(db, 'consulta', objeto ); 
           await updateDoc(docRef, {
             isResolved: true,
-            resolve: respuesta
+            resolve: textareaValue
           });
     
-          
+           setRespuesta("");
           onRequestClose();
         } catch (error) {
           
@@ -71,16 +74,19 @@ function ModalRes({ consulta, objeto ,resoluciones, isOpen, onRequestClose }){
 
             <h3 style={{ marginTop: '20px', textAlign: 'center' }}>Responder</h3>
             <textarea
-              value={respuesta}
-              onChange={(e) => setRespuesta(e.target.value)}
+              value={selectedOption ? selectedOption : textareaValue}
+              onChange={(e) => setTextareaValue(e.target.value)}
               rows="4"
               style={{ width: '100%' }}
             />
 
             <h3 style={{ marginTop: '20px', textAlign: 'center' }}>Seleccione una Respuesta</h3>
             <select
-              value={selectedResolucion}
-              onChange={(e) => setSelectedResolucion(e.target.value)}
+              value={selectedOption}
+              onChange={(e) => {
+                setSelectedOption(e.target.value);
+                setTextareaValue(e.target.value); // Establecer el valor del textarea con lo seleccionado en el dropdown
+              }}
               style={{ width: '100%' }}
             >
               <option value="">Respuestas Previas</option>
