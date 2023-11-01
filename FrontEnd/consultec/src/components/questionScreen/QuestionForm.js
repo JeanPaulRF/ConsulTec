@@ -47,12 +47,12 @@ function QuestionForm({ subTheme, course, user, courseTitle }) {
         isLinked: false,
         isResolvePDF:false,
         linkRef:subtemaRef,
-        resolve:""
+        resolve:"",
+        votes:0
       });
       // Limpia el formulario o realiza otras acciones según tus necesidades
       setTitulo('');
       setConsulta('');
-
       console.log('Consulta guardado con éxito.');
     } catch (error) {
       console.error('Error al guardar el consulta:', error);

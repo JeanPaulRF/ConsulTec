@@ -1,14 +1,14 @@
 import React from 'react'
 import QuestionItem from './QuestionItem'
 
-export default function QuestionList(user, questions) {
+export default function QuestionList(questions) {
   return (
     <div>
       {
-        questions.length > 0 ? (
+        questions.questions.length > 0 ? (
           <ul>
             {
-              questions.map((question) => (
+              questions.questions.map((question) => (
                 <li
                   key={question.id}
                 >
@@ -16,7 +16,7 @@ export default function QuestionList(user, questions) {
                     consulta={question.consulta}
                     IdQuestion={question.id}
                     titulo={question.titulo}
-                    isResolve={question.isResolve}
+                    isResolve={question.isResolved}
                     isLinked={question.isLinked}
                     isResolvePDF={question.isResolvePDF}
                     linkRef={question.linkRef}
