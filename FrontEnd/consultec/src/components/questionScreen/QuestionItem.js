@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,  useEffect} from 'react'
 import { db } from '../../firebaseConfig';
-import { setDoc, doc, getDoc, query } from 'firebase/firestore';
+import { setDoc, doc, getDoc } from 'firebase/firestore';
 export default function QuestionItem(
   { consulta, IdQuestion, titulo, isResolve,
     isLinked, isResolvePDF, linkRef, resolve,
