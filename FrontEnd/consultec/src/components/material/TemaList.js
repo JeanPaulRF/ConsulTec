@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TemaList({ temas, onSelectTheme }) {
   return (
-    <div className="rounded-xl mx-16 my-16 h-1/2 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font">
+    <div className="rounded-xl mx-16 my-16 p-4 text-white bg-gray-700 border-t bg-opacity-90 border-gray-100 shadow-sm body-font">
       {temas.length === 0 ? (
         <p>No hay temas disponibles.</p>
       ) : (
